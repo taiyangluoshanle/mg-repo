@@ -15,3 +15,4 @@ coverage/
 !.changeset/config.json
 .screenshots/
 .cursor/
+.vercel
