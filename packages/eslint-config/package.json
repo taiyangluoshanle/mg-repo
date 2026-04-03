@@ -1,7 +1,10 @@
 {
   "name": "@mg/eslint-config",
   "version": "0.1.0",
-  "private": true,
+  "publishConfig": {
+    "registry": "https://npmjs.bluettipower.com/",
+    "access": "restricted"
+  },
   "files": [
     "base.js",
     "react.js"

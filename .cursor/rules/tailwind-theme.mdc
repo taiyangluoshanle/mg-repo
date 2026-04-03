@@ -1,0 +1,82 @@
+---
+description: TailwindCSS v4 主题系统，CSS 变量体系，语义色使用规范
+globs: "**/*.css,**/*.tsx,packages/tailwind-config/**"
+alwaysApply: false
+---
+
+# Tailwind 主题与 CSS 变量规范
+
+## 主题架构
+
+```
+@mg/tailwind-config
+├── src/base.css       → CSS 变量定义（品牌色、中性色、语义色、明暗模式）
+├── src/preset.ts      → Tailwind preset（扩展 theme）
+└── src/index.ts       → 导出 preset + 工具
+```
+
+## 色彩体系（三层）
+
+### 第一层：品牌色（固定值）
+
+```css
+--color-blue-600: #0071e3;  /* 主品牌色 */
+--color-blue-50 ~ --color-blue-900;
+--color-neutral-50 ~ --color-neutral-950;
+```
+
+### 第二层：语义色（明暗模式切换）
+
+```css
+:root {
+  --brand: var(--color-blue-600);
+  --bg-primary: var(--color-neutral-50);
+  --fg-primary: var(--color-neutral-900);
+  --border: var(--color-neutral-200);
+  --surface: #ffffff;
+}
+.dark {
+  --brand: var(--color-blue-400);
+  --bg-primary: var(--color-neutral-950);
+  --fg-primary: var(--color-neutral-50);
+}
+```
+
+### 第三层：Tailwind Token 映射
+
+消费者在 `@theme inline` 中将 CSS 变量映射为 Tailwind class：
+
+```css
+@theme inline {
+  --color-brand: var(--brand);
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--fg-primary);
+  --color-border: var(--border);
+}
+```
+
+然后在组件中使用：`bg-background`, `text-foreground`, `border-border`, `bg-brand`
+
+## 组件中样式规则
+
+- **使用语义 token**：`bg-background` 而非 `bg-neutral-50`
+- **使用 CVA 管理变体**：不要在组件内写条件 className
+- **使用 cn() 合并类名**：`cn(buttonVariants({ variant }), className)`
+- **动画用 transition + data 属性**：
+
+```tsx
+// ✅ 正确：Base UI 数据属性 + Tailwind transition
+className="transition-[opacity,transform] duration-200 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
+
+// ❌ 错误：CSS keyframe 动画（Base UI 不兼容）
+className="animate-fade-in"
+```
+
+## 功能色
+
+| Token | 用途 | Light | Dark |
+|-------|------|-------|------|
+| `--success` | 成功状态 | `#1a8d48` | `#30d158` |
+| `--warning` | 警告状态 | `#c93400` | `#ff9f0a` |
+| `--error` | 错误状态 | `#de3730` | `#ff453a` |
+| `--info` | 信息提示 | `blue-600` | `blue-400` |

@@ -1,0 +1,96 @@
+---
+description: UI 组件开发规范，包含 Base UI 封装模式、CVA 变体、命名约定
+globs: packages/ui/src/**/*.tsx,packages/ui-commerce/src/**/*.tsx
+alwaysApply: false
+---
+
+# UI 组件开发规范
+
+## 组件分类
+
+### @mg/ui（通用组件，7 类）
+
+| 类别 | 路径 | 示例 |
+|------|------|------|
+| general | `components/general/` | Button, Badge, Link, Toggle, Separator, Icon, Typography |
+| layout | `components/layout/` | Container, Grid, Stack, AspectRatio, ScrollArea |
+| form | `components/form/` | Input, Select, Checkbox, Switch, Slider, DatePicker, Combobox |
+| data-display | `components/data-display/` | Table, Card, Accordion, Avatar, Tag, Skeleton, Empty |
+| feedback | `components/feedback/` | Alert, AlertDialog, Toast, Progress, Spinner, Meter |
+| navigation | `components/navigation/` | Tabs, Breadcrumb, Pagination, Menu, NavigationMenu, Steps |
+| overlay | `components/overlay/` | Dialog, Drawer, Sheet, Popover, Tooltip, DropdownMenu, ContextMenu |
+
+### @mg/ui-commerce（电商组件，5 类）
+
+| 类别 | 路径 | 示例 |
+|------|------|------|
+| product | `components/product/` | ProductCard, ProductGallery, SkuSelector, QuantityStepper |
+| price | `components/price/` | PriceDisplay, PriceRange, CouponTag |
+| cart | `components/cart/` | CartItem, CartSummary, CartDrawer |
+| order | `components/order/` | OrderCard, OrderTimeline, OrderStatus, AddressCard |
+| promotion | `components/promotion/` | CountdownTimer, FlashSaleBadge, BannerCarousel |
+
+## 组件编写模式
+
+```tsx
+"use client";
+
+import { Button as BaseButton } from "@base-ui/react/button";
+import { forwardRef } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@mg/utils";
+
+// 1. CVA 定义变体
+const buttonVariants = cva("inline-flex items-center justify-center ...", {
+  variants: {
+    variant: { default: "bg-brand ...", destructive: "bg-error ..." },
+    size: { sm: "h-8 px-3 text-sm", md: "h-10 px-4", lg: "h-12 px-6 text-lg" },
+  },
+  defaultVariants: { variant: "default", size: "md" },
+});
+
+// 2. Props = Base UI Props + CVA Variants
+type ButtonProps = BaseButton.Props &
+  VariantProps<typeof buttonVariants> & { asChild?: boolean };
+
+// 3. forwardRef 封装
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, ...props }, ref) => (
+    <BaseButton
+      ref={ref}
+      className={cn(buttonVariants({ variant, size }), className)}
+      {...props}
+    />
+  ),
+);
+Button.displayName = "Button";
+
+export { Button, buttonVariants };
+export type { ButtonProps };
+```
+
+## 关键规则
+
+- 每个组件文件顶部加 `"use client"` 指令
+- 使用 `@base-ui/react` 的无头组件作为底座，用 CVA + Tailwind 类加样式
+- 使用 `cn()` (来自 `@mg/utils`) 合并 className
+- 所有组件用 `forwardRef` 暴露 ref
+- 复合组件用 Compound 模式导出（如 `Dialog.Root`, `Dialog.Trigger`）
+- 动画使用 Tailwind `transition-*` + Base UI 的 `data-[starting-style]` / `data-[ending-style]` 属性，不用 CSS keyframe `animate-*`
+- 语义色优先：使用 `bg-background`, `text-foreground`, `border-border` 等语义 token，不直接用 `blue-600`
+
+## 导出结构
+
+```
+packages/ui/src/
+├── index.ts                    # 汇总导出
+├── components/
+│   ├── general/
+│   │   ├── index.ts            # 该类别所有组件 re-export
+│   │   ├── button.tsx
+│   │   └── ...
+│   └── ...
+└── shims/                      # ESM shim（勿动）
+    ├── use-sync-external-store-shim.ts
+    └── use-sync-external-store-with-selector.ts
+```

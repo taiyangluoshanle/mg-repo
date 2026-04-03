@@ -1,7 +1,10 @@
 {
   "name": "@mg/utils",
   "version": "0.1.0",
-  "private": true,
+  "publishConfig": {
+    "registry": "https://npmjs.bluettipower.com/",
+    "access": "restricted"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

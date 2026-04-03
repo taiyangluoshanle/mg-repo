@@ -1,8 +1,11 @@
 {
   "name": "@mg/ui-commerce",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.2",
   "sideEffects": false,
+  "publishConfig": {
+    "registry": "https://npmjs.bluettipower.com/",
+    "access": "restricted"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,7 +16,9 @@
       "require": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

@@ -14,5 +14,4 @@ coverage/
 .changeset/*.md
 !.changeset/config.json
 .screenshots/
-.cursor/
 .vercel

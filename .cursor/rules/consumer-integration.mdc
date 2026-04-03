@@ -1,0 +1,70 @@
+---
+description: 消费端接入 @mg/* 包的指南，包含安装、CSS 配置、SSR 注意事项
+alwaysApply: false
+---
+
+# 消费端接入指南
+
+## 安装
+
+```bash
+# .npmrc 中配置内网 registry
+echo '@mg:registry=https://npmjs.bluettipower.com/' >> .npmrc
+
+# 安装包
+pnpm add @mg/ui @mg/ui-commerce @mg/utils @mg/tailwind-config
+```
+
+## CSS 配置（必须）
+
+消费项目的全局 CSS 文件中需要：
+
+```css
+@import "tailwindcss";
+@import "@mg/tailwind-config/base.css";
+
+/* 关键：告诉 Tailwind v4 扫描组件 dist 中的 class 字符串 */
+@source "../node_modules/@mg/ui/dist";
+@source "../node_modules/@mg/ui-commerce/dist";
+
+/* 在 @theme inline 中映射语义色到 Tailwind */
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--fg-primary);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  /* ... 完整映射参考 apps/playground/app/app.css */
+}
+```
+
+**`@source` 路径注意事项**：路径是相对于 CSS 文件位置。如果 CSS 文件在 `app/app.css`，则 `../node_modules/` 指向项目根的 `node_modules/`。在 monorepo 中，包可能 hoist 到根 `node_modules/`，需根据实际位置调整。
+
+## 使用组件
+
+```tsx
+import { Button, Dialog, Input } from "@mg/ui";
+import { ProductCard, CartDrawer } from "@mg/ui-commerce";
+import { cn, formatPrice } from "@mg/utils";
+```
+
+## SSR 兼容性
+
+`@mg/ui@0.1.2+` 的 ESM 产物已完全消除 CJS 代码（`__require`、`__commonJS`），可直接在以下环境运行：
+
+- **Node.js** (Next.js SSR, React Router v7 SSR)
+- **MiniOxygen / workerd** (Shopify Hydrogen)
+- **Cloudflare Workers**
+- **Deno**
+
+消费者无需额外 SSR 配置（如 `ssr.noExternal`）。
+
+## 已知限制
+
+- `@base-ui/react` 被内联到 `@mg/ui` 的 dist 中，消费者不应直接安装 `@base-ui/react`（会导致重复代码）
+- 当前要求 React ^18.0.0，不支持 React 19
+- 消费端必须手动添加 `@source` 指令，否则 Tailwind 无法生成组件所需的 utility classes

@@ -1,0 +1,63 @@
+---
+description: MG Monorepo 项目架构总览，包含仓库结构、包依赖关系、技术栈和关键决策
+alwaysApply: true
+---
+
+# MG Monorepo 架构
+
+## 技术栈
+
+- **包管理**: pnpm (workspaces) + Turborepo
+- **构建工具**: tsup (esbuild) 用于库包，Vite 用于 playground，Next.js 用于 docs
+- **UI 底座**: Base UI (`@base-ui/react`) 无头组件 + CVA (class-variance-authority) 变体管理
+- **样式**: TailwindCSS v4 + CSS Variables 语义化主题
+- **版本管理**: Changesets → 发布到内网 registry `https://npmjs.bluettipower.com/`
+- **React 版本**: 全仓锁定 React 18.x（通过 `pnpm.overrides`）
+
+## 仓库结构
+
+```
+mg-repo/
+├── packages/
+│   ├── ui/              # @mg/ui — 通用 UI 组件库（59 个组件）
+│   ├── ui-commerce/     # @mg/ui-commerce — 电商业务组件库（18 个组件）
+│   ├── utils/           # @mg/utils — 公共工具函数库
+│   ├── tailwind-config/ # @mg/tailwind-config — TailwindCSS 主题预设 + CSS 变量
+│   ├── tsconfig/        # @mg/tsconfig — 共享 TypeScript 配置
+│   └── eslint-config/   # @mg/eslint-config — 共享 ESLint 配置
+├── apps/
+│   ├── docs/            # Fumadocs 文档站（Next.js）— 部署在 Vercel
+│   └── playground/      # React Router v7 + SSR 消费测试项目
+├── .changeset/          # Changesets 版本管理配置
+├── .npmrc               # @mg scope → 内网 registry
+├── turbo.json           # Turborepo 任务编排
+└── vercel.json          # Vercel 部署配置
+```
+
+## 包依赖关系
+
+```
+@mg/tailwind-config  (独立)
+@mg/utils            (独立，deps: clsx, tailwind-merge)
+@mg/ui               → @mg/utils (external), @base-ui/react (bundled into dist)
+@mg/ui-commerce      → @mg/ui + @mg/utils (external)
+```
+
+## 关键架构决策
+
+1. **@base-ui/react 内联打包**: `@mg/ui` 通过 `noExternal` 将 Base UI 完全打包进 dist，消费者无需安装。这是为了兼容 MiniOxygen/workerd 等纯 ESM 运行时（workerd 不支持 CJS `require()`）。
+2. **use-sync-external-store ESM Shim**: `packages/ui/src/shims/` 目录下有纯 ESM 替代实现，通过 esbuild alias 在构建时替换 CJS 包，确保 dist 中零 `__require()` 调用。
+3. **React 18 锁定**: 根 `package.json` 的 `pnpm.overrides` 强制全仓 React 18.x，避免 React 19 不兼容问题。
+4. **Tailwind 类名扫描**: 消费者需在 CSS 中添加 `@source` 指向 `@mg/ui/dist` 和 `@mg/ui-commerce/dist`，让 Tailwind v4 扫描组件中的 class 字符串。
+
+## 常用命令
+
+```bash
+pnpm dev                           # 启动所有 dev servers
+pnpm build                         # 构建所有包
+pnpm --filter @mg/ui build         # 构建单个包
+pnpm turbo build --filter=docs     # 构建 docs（含依赖链）
+pnpm changeset                     # 创建变更记录
+pnpm version-packages              # 应用版本号
+pnpm release                       # 构建 + 发布
+```

@@ -18,7 +18,13 @@
     "turbo": "^2.4.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": ["esbuild", "sharp"],
+    "overrides": {
+      "react": "^18.0.0",
+      "react-dom": "^18.0.0",
+      "@types/react": "^18.0.0",
+      "@types/react-dom": "^18.0.0"
+    }
   },
   "packageManager": "pnpm@10.14.0",
   "engines": {

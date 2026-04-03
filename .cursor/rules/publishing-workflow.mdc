@@ -1,0 +1,65 @@
+---
+description: 包发布与版本管理流程，Changesets 工作流，内网 registry 配置
+globs: .changeset/**,packages/*/package.json,.npmrc
+alwaysApply: false
+---
+
+# 发布与版本管理
+
+## 内网 Registry
+
+- URL: `https://npmjs.bluettipower.com/`
+- Scope: `@mg:registry=https://npmjs.bluettipower.com/`（配置在 `.npmrc`）
+- 所有 `@mg/*` 包的 `publishConfig.access` 为 `"restricted"`
+
+## 可发布的包（6 个）
+
+| 包名 | 当前版本 | 说明 |
+|------|---------|------|
+| @mg/ui | 0.1.2 | 通用 UI 组件库 |
+| @mg/ui-commerce | 0.1.2 | 电商业务组件库 |
+| @mg/utils | 0.1.0 | 公共工具函数 |
+| @mg/tailwind-config | 0.1.0 | Tailwind 主题预设 |
+| @mg/tsconfig | 0.1.0 | 共享 TS 配置 |
+| @mg/eslint-config | 0.1.0 | 共享 ESLint 配置 |
+
+## 发布流程
+
+```bash
+# 1. 创建变更记录（交互式选择包和版本类型）
+pnpm changeset
+
+# 2. 应用版本号（changeset 自动更新 package.json + CHANGELOG）
+pnpm version-packages
+
+# 3. 构建并发布
+pnpm release
+# 等价于: pnpm turbo build && npx changeset publish
+```
+
+## 手动创建 Changeset 文件
+
+在 `.changeset/` 下创建 `.md` 文件：
+
+```markdown
+---
+"@mg/ui": patch
+---
+
+修复描述
+```
+
+版本类型: `patch`（bugfix）、`minor`（新功能）、`major`（breaking change）
+
+## Changeset 配置要点
+
+- `baseBranch`: `"master"`
+- `ignore`: `["docs", "playground"]`（不参与版本管理）
+- `updateInternalDependencies`: `"patch"`（内部依赖自动 bump）
+
+## 注意事项
+
+- 发布前确保 `pnpm build` 通过（Turbo 会按依赖顺序构建）
+- `@mg/ui` 构建时会内联 `@base-ui/react`，dist 约 1.37MB（gzip ~266KB）
+- 发布后 changeset 自动创建 git tags（如 `@mg/ui@0.1.2`）
+- `workspace:*` 在发布时会被 pnpm 自动转换为实际版本号（如 `^0.1.0`）
