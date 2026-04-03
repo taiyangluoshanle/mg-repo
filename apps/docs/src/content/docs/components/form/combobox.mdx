@@ -1,0 +1,64 @@
+---
+title: Combobox
+description: 带搜索功能的下拉选择框，支持过滤、多选、分组。基于 Base UI Combobox 构建。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <ComboboxBasicDemo />
+</ComponentPreview>
+
+```tsx
+import {
+  ComboboxRoot,
+  ComboboxInput,
+  ComboboxPortal,
+  ComboboxPositioner,
+  ComboboxPopup,
+  ComboboxList,
+  ComboboxItem,
+  ComboboxEmpty,
+} from '@mg/ui';
+
+const fruits = ['苹果', '香蕉', '橙子'];
+
+export default function Demo() {
+  return (
+    <ComboboxRoot>
+      <ComboboxInput placeholder="搜索水果..." />
+      <ComboboxPortal>
+        <ComboboxPositioner sideOffset={4}>
+          <ComboboxPopup>
+            <ComboboxList>
+              {fruits.map((fruit) => (
+                <ComboboxItem key={fruit} value={fruit}>
+                  {fruit}
+                </ComboboxItem>
+              ))}
+            </ComboboxList>
+            <ComboboxEmpty>无匹配结果</ComboboxEmpty>
+          </ComboboxPopup>
+        </ComboboxPositioner>
+      </ComboboxPortal>
+    </ComboboxRoot>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `value` | `string \| string[] \| null` | `-` | 受控选中值（`ComboboxRoot`，多选时为数组） |
+| `onValueChange` | `(value, eventDetails) => void` | `-` | 选中值变化回调（`ComboboxRoot`） |
+| `multiple` | `boolean` | `false` | 是否多选（`ComboboxRoot`） |
+| `filter` | `(itemValue, query, item) => boolean` | `-` | 自定义过滤逻辑（`ComboboxRoot`） |
+| `disabled` | `boolean` | `false` | 是否禁用（`ComboboxRoot` / 子组件透传） |
+| `placeholder` | `string` | `-` | 输入框占位文本（`ComboboxInput`） |

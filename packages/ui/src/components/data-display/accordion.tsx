@@ -1,89 +1,40 @@
-import {
-  forwardRef,
-  useId,
-  useState,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
-import { cn } from "@mg/utils";
+import * as React from 'react';
+import { Accordion } from '@base-ui/react/accordion';
+import { type ReactNode } from 'react';
+import { cn } from '@mg/utils';
 
-export const Accordion = forwardRef<
-  HTMLDivElement,
-  HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("divide-y divide-border rounded-lg border border-border", className)}
-    {...props}
-  />
-));
-Accordion.displayName = "Accordion";
-
-export interface AccordionItemProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
-  title: ReactNode;
-  defaultOpen?: boolean;
+interface AccordionProps {
+  className?: string;
+  items: { label: ReactNode; value: string; content: ReactNode; icon?: ReactNode }[];
 }
 
-export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
-  (
-    {
-      className,
-      title,
-      children,
-      defaultOpen = false,
-      ...props
-    },
-    ref,
-  ) => {
-    const [open, setOpen] = useState(defaultOpen);
-    const contentId = useId();
-    const triggerId = `${contentId}-trigger`;
+export function MGAccordion({ className, items }: AccordionProps) {
+  return (
+    <Accordion.Root className={cn("flex w-full flex-col justify-center text-gray-900", className)}>
+      {
+        items.map((item) => (
+          <Accordion.Item key={item.value} className="border-b border-gray-200">
+            <Accordion.Header>
+              <Accordion.Trigger className="group relative flex w-full items-baseline justify-between gap-4 bg-gray-50 py-2 pr-1 pl-3 text-left font-medium hover:bg-gray-100 focus-visible:z-1 focus-visible:outline-2 focus-visible:outline-blue-800">
+                {item.label}
+                {item.icon ?? <PlusIcon className="mr-2 size-3 shrink-0 transition-all ease-out group-data-panel-open:scale-110 group-data-panel-open:rotate-45" />}
+              </Accordion.Trigger>
+            </Accordion.Header>
+            <Accordion.Panel className="h-(--accordion-panel-height) overflow-hidden text-base text-gray-600 transition-[height] ease-out data-ending-style:h-0 data-starting-style:h-0">
+              {item.content}
+            </Accordion.Panel>
+          </Accordion.Item>
+        ))
+      }
 
-    return (
-      <div ref={ref} className={cn("bg-background", className)} {...props}>
-        <button
-          id={triggerId}
-          type="button"
-          className={cn(
-            "flex w-full items-center justify-between gap-2 px-4 py-3 text-left text-sm font-medium text-foreground",
-            "hover:bg-background-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border",
-          )}
-          aria-expanded={open}
-          aria-controls={contentId}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="min-w-0 flex-1">{title}</span>
-          <span
-            className={cn(
-              "shrink-0 text-foreground-secondary transition-transform duration-200",
-              open && "rotate-180",
-            )}
-            aria-hidden
-          >
-            ▼
-          </span>
-        </button>
-        <div
-          className={cn(
-            "grid transition-[grid-template-rows] duration-200 ease-out motion-reduce:transition-none",
-            open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-          )}
-        >
-          <div className="min-h-0 overflow-hidden">
-            <div
-              id={contentId}
-              role="region"
-              aria-labelledby={triggerId}
-              className="border-t border-border px-4 pb-4 pt-2 text-sm text-foreground-secondary"
-            >
-              {children}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  },
-);
+    </Accordion.Root>
+  );
+}
 
-AccordionItem.displayName = "AccordionItem";
+function PlusIcon(props: React.ComponentProps<'svg'>) {
+  return (
+    <svg viewBox="0 0 12 12" fill="currentcolor" {...props}>
+      <path d="M6.75 0H5.25V5.25H0V6.75L5.25 6.75V12H6.75V6.75L12 6.75V5.25H6.75V0Z" />
+    </svg>
+  );
+}

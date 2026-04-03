@@ -1,13 +1,13 @@
 "use client";
 
-import { Select } from "@mg/ui";
+import { Select, SelectItem } from "@mg/ui";
 
 export const SelectBasicDemo = () => {
   return (
     <Select placeholder="请选择" className="w-full max-w-sm">
-      <option value="1">选项一</option>
-      <option value="2">选项二</option>
-      <option value="3">选项三</option>
+      <SelectItem value="1">选项一</SelectItem>
+      <SelectItem value="2">选项二</SelectItem>
+      <SelectItem value="3">选项三</SelectItem>
     </Select>
   );
 };

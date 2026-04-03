@@ -1,0 +1,46 @@
+---
+title: Checkbox Group
+description: 复选框组，提供共享状态管理，支持全选/半选联动。基于 Base UI CheckboxGroup 构建。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <CheckboxGroupBasicDemo />
+</ComponentPreview>
+
+```tsx
+'use client';
+
+import { useState } from 'react';
+import { CheckboxGroupRoot, Checkbox } from '@mg/ui';
+
+export default function Demo() {
+  const [value, setValue] = useState<string[]>([]);
+  return (
+    <CheckboxGroupRoot value={value} onValueChange={setValue}>
+      <Checkbox value="apple" label="苹果" />
+      <Checkbox value="banana" label="香蕉" />
+      <Checkbox value="orange" label="橙子" />
+    </CheckboxGroupRoot>
+  );
+}
+```
+
+## API
+
+### CheckboxGroupRoot
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `value` | `string[]` | `-` | 受控选中值的集合 |
+| `defaultValue` | `string[]` | `-` | 非受控初始选中集合 |
+| `onValueChange` | `(value: string[], eventDetails) => void` | `-` | 选中集合变化回调 |
+| `allValues` | `string[]` | `-` | 全选场景下全部选项的值，用于半选/全选状态 |
+| `disabled` | `boolean` | `false` | 是否禁用整组 |

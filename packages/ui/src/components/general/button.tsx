@@ -1,3 +1,6 @@
+"use client";
+
+import { Button as BaseButton } from "@base-ui/react/button";
 import {
   Children,
   cloneElement,
@@ -70,29 +73,43 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
     },
     ref,
   ) => {
+    const mergedClassName = cn(buttonVariants({ variant, size }), className);
+
     if (asChild) {
       const child = Children.only(children);
       if (!isValidElement(child)) {
         throw new Error("Button with asChild expects a single React element child.");
       }
       const childProps = child.props as { className?: string; ref?: Ref<HTMLElement> };
-      return cloneElement(child as ReactElement<Record<string, unknown>>, {
-        ...(child.props as Record<string, unknown>),
-        ...props,
-        className: cn(buttonVariants({ variant, size }), className, childProps.className),
-        ref: mergeRefs(ref, childProps.ref),
-      } as never);
+      const nativeButton =
+        typeof child.type === "string" && child.type === "button";
+
+      return (
+        <BaseButton
+          {...props}
+          nativeButton={nativeButton}
+          type={nativeButton ? type : undefined}
+          className={mergedClassName}
+          ref={ref}
+          render={(renderProps) =>
+            cloneElement(child as ReactElement<Record<string, unknown>>, {
+              ...(child.props as Record<string, unknown>),
+              ...renderProps,
+              className: cn(renderProps.className, childProps.className),
+              ref: mergeRefs(
+                renderProps.ref as Ref<HTMLElement> | undefined,
+                childProps.ref,
+              ),
+            } as never)
+          }
+        />
+      );
     }
 
     return (
-      <button
-        type={type}
-        className={cn(buttonVariants({ variant, size }), className)}
-        ref={ref as Ref<HTMLButtonElement>}
-        {...props}
-      >
+      <BaseButton {...props} type={type} className={mergedClassName} ref={ref}>
         {children}
-      </button>
+      </BaseButton>
     );
   },
 );

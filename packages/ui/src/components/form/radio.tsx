@@ -1,26 +1,9 @@
 "use client";
 
+import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
+import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import * as React from "react";
 import { cn } from "@mg/utils";
-
-type RadioGroupContextValue = {
-  value: string | undefined;
-  onValueChange: (value: string) => void;
-  name: string;
-  disabled?: boolean;
-};
-
-const RadioGroupContext = React.createContext<RadioGroupContextValue | null>(
-  null,
-);
-
-function useRadioGroupContext(component: string): RadioGroupContextValue {
-  const ctx = React.useContext(RadioGroupContext);
-  if (!ctx) {
-    throw new Error(`${component} must be used within RadioGroup`);
-  }
-  return ctx;
-}
 
 export type RadioGroupProps = Omit<
   React.ComponentPropsWithoutRef<"div">,
@@ -49,44 +32,20 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   ) => {
     const autoName = React.useId();
     const name = nameProp ?? `radio-group-${autoName}`;
-    const [uncontrolledValue, setUncontrolledValue] = React.useState<
-      string | undefined
-    >(defaultValue);
-
-    const isControlled = valueProp !== undefined;
-    const value = isControlled ? valueProp : uncontrolledValue;
-
-    const onValueChangeInner = React.useCallback(
-      (next: string) => {
-        if (!isControlled) {
-          setUncontrolledValue(next);
-        }
-        onValueChange?.(next);
-      },
-      [isControlled, onValueChange],
-    );
-
-    const contextValue = React.useMemo<RadioGroupContextValue>(
-      () => ({
-        value,
-        onValueChange: onValueChangeInner,
-        name,
-        disabled,
-      }),
-      [value, onValueChangeInner, name, disabled],
-    );
 
     return (
-      <RadioGroupContext.Provider value={contextValue}>
-        <div
-          ref={ref}
-          role="radiogroup"
-          className={cn("flex flex-col gap-2", className)}
-          {...props}
-        >
-          {children}
-        </div>
-      </RadioGroupContext.Provider>
+      <RadioGroupPrimitive
+        ref={ref}
+        name={name}
+        value={valueProp}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        onValueChange={(next) => onValueChange?.(String(next))}
+        className={cn("flex flex-col gap-2", className)}
+        {...props}
+      >
+        {children}
+      </RadioGroupPrimitive>
     );
   },
 );
@@ -102,49 +61,53 @@ export type RadioItemProps = Omit<
 };
 
 const RadioItem = React.forwardRef<HTMLInputElement, RadioItemProps>(
-  ({ className, id, value, label, disabled: disabledProp, ...props }, ref) => {
-    const ctx = useRadioGroupContext("RadioItem");
+  ({ className, id, value, label, disabled, ...props }, ref) => {
     const generatedId = React.useId();
     const inputId = id ?? generatedId;
-    const disabled = disabledProp ?? ctx.disabled;
-    const checked = ctx.value === value;
+
+    const inputRef = React.useCallback(
+      (node: HTMLInputElement | null) => {
+        if (typeof ref === "function") {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      },
+      [ref],
+    );
 
     return (
       <label
         htmlFor={inputId}
         className={cn(
           "inline-flex cursor-pointer items-start gap-2",
-          disabled && "cursor-not-allowed opacity-50",
+          "has-disabled:cursor-not-allowed has-disabled:opacity-50",
           className,
         )}
       >
         <span className="relative mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center">
-          <input
-            ref={ref}
+          <RadioPrimitive.Root
             id={inputId}
-            type="radio"
-            name={ctx.name}
             value={value}
-            checked={checked}
             disabled={disabled}
-            className="peer sr-only"
-            onChange={() => {
-              if (!disabled) {
-                ctx.onValueChange(value);
-              }
-            }}
-            {...props}
-          />
-          <span
+            inputRef={inputRef}
             className={cn(
-              "flex h-4 w-4 items-center justify-center rounded-full border border-border bg-background transition-colors",
-              "peer-focus-visible:ring-2 peer-focus-visible:ring-brand peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background",
-              "peer-checked:border-brand peer-checked:[&>span]:scale-100",
+              "flex h-4 w-4 items-center justify-center rounded-full border border-border bg-background transition-colors outline-none",
+              "focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "data-checked:border-brand",
             )}
-            aria-hidden
+            {...(props as Omit<
+              React.ComponentPropsWithoutRef<typeof RadioPrimitive.Root>,
+              "id" | "value" | "disabled" | "inputRef" | "className"
+            >)}
           >
-            <span className="h-2 w-2 scale-0 rounded-full bg-brand transition-transform" />
-          </span>
+            <RadioPrimitive.Indicator
+              keepMounted
+              className="flex items-center justify-center [&_span]:scale-0 data-checked:[&_span]:scale-100"
+            >
+              <span className="h-2 w-2 rounded-full bg-brand transition-transform" />
+            </RadioPrimitive.Indicator>
+          </RadioPrimitive.Root>
         </span>
         <span className="text-sm text-foreground">{label}</span>
       </label>

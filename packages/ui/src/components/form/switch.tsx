@@ -1,11 +1,12 @@
 "use client";
 
+import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "@mg/utils";
 
 const switchTrackVariants = cva(
-  "relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-brand data-[state=unchecked]:bg-muted",
+  "relative inline-flex shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-checked:bg-brand data-unchecked:bg-muted",
   {
     variants: {
       size: {
@@ -25,9 +26,9 @@ const switchThumbVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-4 w-4 data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0",
-        md: "h-5 w-5 data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
-        lg: "h-6 w-6 data-[state=checked]:translate-x-7 data-[state=unchecked]:translate-x-0",
+        sm: "h-4 w-4 data-checked:translate-x-4 data-unchecked:translate-x-0",
+        md: "h-5 w-5 data-checked:translate-x-5 data-unchecked:translate-x-0",
+        lg: "h-6 w-6 data-checked:translate-x-7 data-unchecked:translate-x-0",
       },
     },
     defaultVariants: {
@@ -55,40 +56,41 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       defaultChecked,
       onCheckedChange,
       disabled,
-      type = "button",
+      type: _type,
+      children: _children,
+      value: valueProp,
       ...props
     },
     ref,
   ) => {
-    const [uncontrolled, setUncontrolled] = React.useState(
-      defaultChecked ?? false,
-    );
-    const isControlled = checkedProp !== undefined;
-    const checked = isControlled ? checkedProp : uncontrolled;
-
     return (
-      <button
-        ref={ref}
-        type={type}
-        role="switch"
-        aria-checked={checked}
+      <SwitchPrimitive.Root
+        ref={ref as React.Ref<HTMLElement>}
+        checked={checkedProp}
+        defaultChecked={defaultChecked}
         disabled={disabled}
-        data-state={checked ? "checked" : "unchecked"}
+        onCheckedChange={(next) => onCheckedChange?.(next)}
+        value={
+          typeof valueProp === "string"
+            ? valueProp
+            : valueProp === undefined
+              ? undefined
+              : String(valueProp)
+        }
         className={cn(switchTrackVariants({ size }), className)}
-        onClick={() => {
-          const next = !checked;
-          if (!isControlled) {
-            setUncontrolled(next);
-          }
-          onCheckedChange?.(next);
-        }}
-        {...props}
+        {...(props as Omit<
+          React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>,
+          | "ref"
+          | "checked"
+          | "defaultChecked"
+          | "disabled"
+          | "onCheckedChange"
+          | "value"
+          | "className"
+        >)}
       >
-        <span
-          data-state={checked ? "checked" : "unchecked"}
-          className={switchThumbVariants({ size })}
-        />
-      </button>
+        <SwitchPrimitive.Thumb className={switchThumbVariants({ size })} />
+      </SwitchPrimitive.Root>
     );
   },
 );

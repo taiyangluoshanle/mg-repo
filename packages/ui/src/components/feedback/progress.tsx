@@ -1,3 +1,6 @@
+"use client";
+
+import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@mg/utils";
@@ -45,20 +48,19 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   ({ className, value, variant, size, ...props }, ref) => {
     const clamped = Math.min(100, Math.max(0, value));
     return (
-      <div
+      <ProgressPrimitive.Root
         ref={ref}
-        role="progressbar"
-        aria-valuenow={clamped}
-        aria-valuemin={0}
-        aria-valuemax={100}
+        value={clamped}
+        max={100}
         className={cn(progressTrackVariants({ size }), className)}
         {...props}
       >
-        <div
-          className={cn(progressIndicatorVariants({ variant }))}
-          style={{ width: `${clamped}%` }}
-        />
-      </div>
+        <ProgressPrimitive.Track className="h-full w-full">
+          <ProgressPrimitive.Indicator
+            className={cn(progressIndicatorVariants({ variant }))}
+          />
+        </ProgressPrimitive.Track>
+      </ProgressPrimitive.Root>
     );
   },
 );

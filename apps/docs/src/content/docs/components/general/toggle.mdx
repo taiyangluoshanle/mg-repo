@@ -1,0 +1,39 @@
+---
+title: Toggle
+description: 一个两态切换按钮，可以处于开或关状态。基于 Base UI Toggle 构建。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <ToggleBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Toggle } from "@mg/ui";
+
+export default function Demo() {
+  return (
+    <Toggle aria-label="加粗">
+      <BoldIcon />
+    </Toggle>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `pressed` | `boolean` | — | 受控按下状态 |
+| `defaultPressed` | `boolean` | `false` | 默认按下状态 |
+| `onPressedChange` | `(pressed: boolean) => void` | — | 状态变化回调 |
+| `variant` | `"default" \| "outline"` | `"default"` | 样式变体 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 尺寸 |
+| `disabled` | `boolean` | `false` | 禁用 |

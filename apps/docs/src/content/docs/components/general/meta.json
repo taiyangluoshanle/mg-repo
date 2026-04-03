@@ -1,4 +1,4 @@
 {
   "title": "General",
-  "pages": ["button", "icon", "typography", "link", "separator"]
+  "pages": ["button", "icon", "typography", "link", "separator", "toggle", "toggle-group"]
 }

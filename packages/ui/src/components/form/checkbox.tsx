@@ -1,5 +1,6 @@
 "use client";
 
+import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
 import * as React from "react";
 import { cn } from "@mg/utils";
 
@@ -21,12 +22,24 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       defaultChecked,
       onCheckedChange,
       disabled,
+      value: valueProp,
       ...props
     },
     ref,
   ) => {
     const generatedId = React.useId();
     const inputId = id ?? generatedId;
+
+    const inputRef = React.useCallback(
+      (node: HTMLInputElement | null) => {
+        if (typeof ref === "function") {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      },
+      [ref],
+    );
 
     return (
       <label
@@ -38,44 +51,59 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         )}
       >
         <span className="relative mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center">
-          <input
-            ref={ref}
+          <CheckboxPrimitive.Root
             id={inputId}
-            type="checkbox"
-            className="peer sr-only"
+            inputRef={inputRef}
             checked={checked}
             defaultChecked={defaultChecked}
             disabled={disabled}
-            onChange={(e) => {
-              onCheckedChange?.(e.target.checked);
-            }}
-            {...props}
-          />
-          <span
+            onCheckedChange={(next) => onCheckedChange?.(next)}
+            value={
+              typeof valueProp === "string"
+                ? valueProp
+                : valueProp === undefined
+                  ? undefined
+                  : String(valueProp)
+            }
             className={cn(
-              "flex h-4 w-4 items-center justify-center rounded border border-border bg-background transition-colors",
-              "peer-focus-visible:ring-2 peer-focus-visible:ring-brand peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background",
-              "peer-disabled:cursor-not-allowed",
-              "peer-checked:border-brand peer-checked:bg-brand peer-checked:[&_svg]:opacity-100",
+              "flex h-4 w-4 items-center justify-center rounded border border-border bg-background transition-colors outline-none",
+              "focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "data-disabled:cursor-not-allowed",
+              "data-checked:border-brand data-checked:bg-brand data-checked:[&_svg]:opacity-100",
             )}
-            aria-hidden
+            {...(props as Omit<
+              React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
+              | "id"
+              | "inputRef"
+              | "checked"
+              | "defaultChecked"
+              | "disabled"
+              | "onCheckedChange"
+              | "value"
+              | "className"
+            >)}
           >
-            <svg
-              className="h-3 w-3 text-background opacity-0 transition-opacity"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden
+            <CheckboxPrimitive.Indicator
+              keepMounted
+              className="flex items-center justify-center text-background [&_svg]:opacity-0 data-checked:[&_svg]:opacity-100"
             >
-              <path
-                d="M2.5 6L5 8.5L9.5 3.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
+              <svg
+                className="h-3 w-3 transition-opacity"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden
+              >
+                <path
+                  d="M2.5 6L5 8.5L9.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </CheckboxPrimitive.Indicator>
+          </CheckboxPrimitive.Root>
         </span>
         <span className="text-sm text-foreground">{label}</span>
       </label>

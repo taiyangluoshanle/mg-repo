@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { createPortal } from "react-dom";
+import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import { cn } from "@mg/utils";
 
 export interface SheetProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -17,47 +17,21 @@ export function Sheet({
   className,
   ...props
 }: SheetProps) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  React.useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onOpenChange(false);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, onOpenChange]);
-
-  if (!open || !mounted || typeof document === "undefined") {
-    return null;
-  }
-
-  return createPortal(
-    <div className="fixed inset-0 z-[100]">
-      <button
-        type="button"
-        aria-label="Close sheet"
-        className="absolute inset-0 bg-background-inverse/40 backdrop-blur-[1px]"
-        onClick={() => onOpenChange(false)}
-      />
-      <div
-        role="dialog"
-        aria-modal="true"
-        className={cn(
-          "fixed bottom-0 left-0 right-0 z-[101] max-h-[90vh] overflow-y-auto rounded-t-xl border border-border border-b-0 bg-background p-6 text-foreground shadow-xl animate-slide-up",
-          className,
-        )}
-        onClick={(e) => e.stopPropagation()}
-        {...props}
-      >
-        {children}
-      </div>
-    </div>,
-    document.body,
+  return (
+    <BaseDialog.Root open={open} onOpenChange={(nextOpen) => onOpenChange(nextOpen)}>
+      <BaseDialog.Portal>
+        <BaseDialog.Backdrop className="fixed inset-0 z-[100] bg-background-inverse/40 backdrop-blur-[1px] transition-opacity duration-200 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0" />
+        <BaseDialog.Popup
+          className={cn(
+            "fixed bottom-0 left-0 right-0 z-[101] max-h-[90vh] overflow-y-auto rounded-t-xl border border-border border-b-0 bg-background p-6 text-foreground shadow-xl transition-[opacity,transform] duration-300 data-[starting-style]:translate-y-full data-[starting-style]:opacity-0 data-[ending-style]:translate-y-full data-[ending-style]:opacity-0",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </BaseDialog.Popup>
+      </BaseDialog.Portal>
+    </BaseDialog.Root>
   );
 }
 Sheet.displayName = "Sheet";

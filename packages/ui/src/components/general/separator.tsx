@@ -1,3 +1,6 @@
+"use client";
+
+import { Separator as BaseSeparator } from "@base-ui/react/separator";
 import { forwardRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@mg/utils";
@@ -20,15 +23,14 @@ type SeparatorProps = React.HTMLAttributes<HTMLDivElement> &
 const Separator = forwardRef<HTMLDivElement, SeparatorProps>(
   ({ className, orientation, ...props }, ref) => {
     return (
-      <div
-        role="separator"
-        aria-orientation={orientation === "vertical" ? "vertical" : "horizontal"}
+      <BaseSeparator
+        orientation={orientation ?? "horizontal"}
         className={cn(separatorVariants({ orientation }), className)}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 Separator.displayName = "Separator";
 

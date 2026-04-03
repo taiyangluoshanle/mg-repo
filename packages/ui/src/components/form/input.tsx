@@ -1,3 +1,6 @@
+"use client";
+
+import { Input as BaseInput } from "@base-ui/react/input";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "@mg/utils";
@@ -46,10 +49,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     if (!hasAdornment) {
       return (
-        <input
+        <BaseInput
           ref={ref}
           disabled={disabled}
-          className={cn(inputVariants({ variant, size, className }))}
+          className={cn(inputVariants({ variant, size }), className)}
           {...props}
         />
       );
@@ -76,7 +79,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {startAdornment}
           </span>
         ) : null}
-        <input
+        <BaseInput
           ref={ref}
           disabled={disabled}
           className={cn(

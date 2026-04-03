@@ -1,4 +1,4 @@
 {
   "title": "Overlay",
-  "pages": ["dialog", "drawer", "dropdown-menu", "popover", "tooltip", "sheet"]
+  "pages": ["dialog", "drawer", "dropdown-menu", "popover", "tooltip", "sheet", "collapsible", "context-menu", "preview-card"]
 }

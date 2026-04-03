@@ -1,0 +1,41 @@
+---
+title: Toggle Group
+description: 一组共享状态的切换按钮，支持单选和多选模式。基于 Base UI ToggleGroup 构建。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <ToggleGroupBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Toggle, ToggleGroup } from "@mg/ui";
+
+export default function Demo() {
+  return (
+    <ToggleGroup>
+      <Toggle value="left" aria-label="左对齐">左</Toggle>
+      <Toggle value="center" aria-label="居中">中</Toggle>
+      <Toggle value="right" aria-label="右对齐">右</Toggle>
+    </ToggleGroup>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `value` | `string[]` | — | 受控选中值 |
+| `defaultValue` | `string[]` | `[]` | 默认选中值 |
+| `onValueChange` | `(value: string[]) => void` | — | 值变化回调 |
+| `multiple` | `boolean` | `false` | 是否允许多选 |
+| `disabled` | `boolean` | `false` | 禁用整组 |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 方向 |

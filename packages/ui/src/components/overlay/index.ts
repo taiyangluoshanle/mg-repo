@@ -7,7 +7,35 @@ export {
   DialogClose,
   type DialogProps,
 } from "./dialog";
-export { Drawer, type DrawerProps } from "./drawer";
+export {
+  Drawer,
+  DrawerRoot,
+  DrawerProvider,
+  DrawerTrigger,
+  DrawerPortal,
+  DrawerBackdrop,
+  DrawerViewport,
+  DrawerPopup,
+  DrawerContent,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerClose,
+  DrawerSwipeArea,
+  DrawerIndent,
+  DrawerIndentBackground,
+  type DrawerProps,
+} from "./drawer";
+export {
+  PreviewCardRoot,
+  PreviewCardTrigger,
+  PreviewCardPortal,
+  PreviewCardPositioner,
+  PreviewCardPopup,
+  PreviewCardArrow,
+  PreviewCardBackdrop,
+  PreviewCardViewport,
+  type PreviewCardRootProps,
+} from "./preview-card";
 export {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -30,3 +58,10 @@ export {
   type TooltipContentProps,
 } from "./tooltip";
 export { Sheet, type SheetProps } from "./sheet";
+export {
+  CollapsibleRoot,
+  CollapsibleTrigger,
+  CollapsiblePanel,
+  type CollapsibleRootProps,
+} from "./collapsible";
+export { ContextMenuRoot, ContextMenuTrigger, type ContextMenuRootProps } from "./context-menu";

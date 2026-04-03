@@ -1,22 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { createPortal } from "react-dom";
+import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import { cn } from "@mg/utils";
-
-interface DialogContextValue {
-  onOpenChange: (open: boolean) => void;
-}
-
-const DialogContext = React.createContext<DialogContextValue | null>(null);
-
-function useDialogContext(component: string): DialogContextValue {
-  const ctx = React.useContext(DialogContext);
-  if (ctx == null) {
-    throw new Error(`${component} must be used within Dialog`);
-  }
-  return ctx;
-}
 
 export interface DialogProps {
   open: boolean;
@@ -26,50 +12,22 @@ export interface DialogProps {
 }
 
 export function Dialog({ open, onOpenChange, children, className }: DialogProps) {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  React.useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onOpenChange(false);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, onOpenChange]);
-
-  if (!open || !mounted || typeof document === "undefined") {
-    return null;
-  }
-
-  return createPortal(
-    <DialogContext.Provider value={{ onOpenChange }}>
-      <div className="fixed inset-0 z-[100]">
-        <button
-          type="button"
-          aria-label="Close dialog"
-          className="absolute inset-0 bg-background-inverse/40 backdrop-blur-[1px]"
-          onClick={() => onOpenChange(false)}
-        />
-        <div className="fixed inset-0 flex items-center justify-center p-4">
-          <div
-            role="dialog"
-            aria-modal="true"
+  return (
+    <BaseDialog.Root open={open} onOpenChange={(nextOpen) => onOpenChange(nextOpen)}>
+      <BaseDialog.Portal>
+        <BaseDialog.Backdrop className="fixed inset-0 z-[100] bg-background-inverse/40 backdrop-blur-[1px] transition-opacity duration-200 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0" />
+        <div className="fixed inset-0 z-[101] flex items-center justify-center p-4">
+          <BaseDialog.Popup
             className={cn(
-              "relative z-[101] w-full max-w-lg rounded-xl border border-border bg-background p-6 text-foreground shadow-xl animate-scale-in",
+              "relative z-[101] w-full max-w-lg rounded-xl border border-border bg-background p-6 text-foreground shadow-xl transition-[opacity,transform] duration-200 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0",
               className,
             )}
-            onClick={(e) => e.stopPropagation()}
           >
             {children}
-          </div>
+          </BaseDialog.Popup>
         </div>
-      </div>
-    </DialogContext.Provider>,
-    document.body,
+      </BaseDialog.Portal>
+    </BaseDialog.Root>
   );
 }
 Dialog.displayName = "Dialog";
@@ -128,22 +86,18 @@ DialogFooter.displayName = "DialogFooter";
 export const DialogClose = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className, type = "button", onClick, ...props }, ref) => {
-  const { onOpenChange } = useDialogContext("DialogClose");
-  return (
-    <button
-      ref={ref}
-      type={type}
-      className={cn(
-        "rounded-md p-1 text-foreground-muted opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2",
-        className,
-      )}
-      onClick={(e) => {
-        onClick?.(e);
-        if (!e.defaultPrevented) onOpenChange(false);
-      }}
-      {...props}
-    />
-  );
-});
+>(({ className, type = "button", onClick, ...props }, ref) => (
+  <BaseDialog.Close
+    ref={ref}
+    type={type}
+    className={cn(
+      "rounded-md p-1 text-foreground-muted opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2",
+      className,
+    )}
+    onClick={(event) => {
+      onClick?.(event);
+    }}
+    {...props}
+  />
+));
 DialogClose.displayName = "DialogClose";

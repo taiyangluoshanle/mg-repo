@@ -10,3 +10,5 @@ export {
 } from "./typography";
 export { Link, linkVariants, type LinkProps } from "./link";
 export { Separator, separatorVariants, type SeparatorProps } from "./separator";
+export { Toggle, toggleVariants, type ToggleProps } from "./toggle";
+export { ToggleGroup, type ToggleGroupProps } from "./toggle-group";

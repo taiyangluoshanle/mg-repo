@@ -1,11 +1,7 @@
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useState,
-  type HTMLAttributes,
-  type ImgHTMLAttributes,
-} from "react";
+"use client";
+
+import { Avatar as BaseAvatar } from "@base-ui/react/avatar";
+import { forwardRef, type ComponentPropsWithoutRef, type ImgHTMLAttributes } from "react";
 import { cn } from "@mg/utils";
 
 const sizeClasses = {
@@ -17,7 +13,8 @@ const sizeClasses = {
 
 export type AvatarSize = keyof typeof sizeClasses;
 
-export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
+export interface AvatarProps
+  extends Omit<ComponentPropsWithoutRef<typeof BaseAvatar.Root>, "children"> {
   src?: ImgHTMLAttributes<HTMLImageElement>["src"];
   alt?: string;
   fallback: string;
@@ -34,7 +31,7 @@ function initialsFromFallback(fallback: string): string {
   return trimmed.slice(0, 2).toUpperCase();
 }
 
-export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
+export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(
   (
     {
       className,
@@ -46,19 +43,8 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     },
     ref,
   ) => {
-    const [imageFailed, setImageFailed] = useState(false);
-    const showImage = Boolean(src) && !imageFailed;
-
-    useEffect(() => {
-      setImageFailed(false);
-    }, [src]);
-
-    const handleError = useCallback(() => {
-      setImageFailed(true);
-    }, []);
-
     return (
-      <div
+      <BaseAvatar.Root
         ref={ref}
         className={cn(
           "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-background-secondary text-foreground-secondary",
@@ -67,19 +53,21 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         )}
         {...props}
       >
-        {showImage ? (
-          <img
+        {src ? (
+          <BaseAvatar.Image
             src={src}
             alt={alt}
             className="size-full object-cover"
-            onError={handleError}
           />
-        ) : (
-          <span className="font-medium text-foreground" aria-hidden>
-            {initialsFromFallback(fallback)}
-          </span>
-        )}
-      </div>
+        ) : null}
+        <BaseAvatar.Fallback
+          className="font-medium text-foreground"
+          delay={0}
+          aria-hidden
+        >
+          {initialsFromFallback(fallback)}
+        </BaseAvatar.Fallback>
+      </BaseAvatar.Root>
     );
   },
 );

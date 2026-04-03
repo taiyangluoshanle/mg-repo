@@ -1,3 +1,6 @@
+"use client";
+
+import { Slider as SliderPrimitive } from "@base-ui/react/slider";
 import * as React from "react";
 import { cn } from "@mg/utils";
 
@@ -29,34 +32,60 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
     },
     ref,
   ) => {
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onChange?.(e);
-      onValueChange?.(Number(e.target.value));
-    };
+    const handleValueChange = React.useCallback(
+      (next: number) => {
+        onValueChange?.(next);
+        onChange?.({
+          target: { value: String(next) },
+          currentTarget: { value: String(next) },
+        } as React.ChangeEvent<HTMLInputElement>);
+      },
+      [onChange, onValueChange],
+    );
+
+    const valueProps =
+      value !== undefined ? { value } : defaultValue !== undefined
+        ? { defaultValue }
+        : {};
 
     return (
-      <input
-        ref={ref}
-        type="range"
+      <SliderPrimitive.Root
         min={min}
         max={max}
         step={step}
-        value={value}
-        defaultValue={defaultValue}
         disabled={disabled}
-        onChange={handleChange}
+        onValueChange={handleValueChange}
         className={cn(
-          "h-2 w-full cursor-pointer appearance-none rounded-full bg-muted accent-brand",
+          "relative flex w-full touch-none select-none items-center",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          "[&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-border [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:shadow-sm",
-          "[&::-webkit-slider-thumb]:focus-visible:outline-none [&::-webkit-slider-thumb]:focus-visible:ring-2 [&::-webkit-slider-thumb]:focus-visible:ring-brand",
-          "[&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-border [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:shadow-sm",
-          "[&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-muted",
-          "focus-visible:outline-none",
           className,
         )}
-        {...props}
-      />
+        {...valueProps}
+        {...(props as Omit<
+          React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>,
+          | "min"
+          | "max"
+          | "step"
+          | "disabled"
+          | "onValueChange"
+          | "className"
+          | "value"
+          | "defaultValue"
+        >)}
+      >
+        <SliderPrimitive.Control className="relative flex w-full items-center">
+          <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-muted">
+            <SliderPrimitive.Indicator className="absolute h-full rounded-full bg-brand" />
+          </SliderPrimitive.Track>
+          <SliderPrimitive.Thumb
+            inputRef={ref}
+            className={cn(
+              "block h-4 w-4 rounded-full border-2 border-border bg-background shadow-sm outline-none",
+              "focus-visible:ring-2 focus-visible:ring-brand",
+            )}
+          />
+        </SliderPrimitive.Control>
+      </SliderPrimitive.Root>
     );
   },
 );

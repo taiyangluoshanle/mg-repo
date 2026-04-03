@@ -9,3 +9,11 @@ export {
 export { Progress, type ProgressProps } from "./progress";
 export { Spinner, type SpinnerProps } from "./spinner";
 export { AlertDialog, type AlertDialogProps } from "./alert-dialog";
+export {
+  MeterRoot,
+  MeterTrack,
+  MeterIndicator,
+  MeterLabel,
+  MeterValue,
+  type MeterRootProps,
+} from "./meter";

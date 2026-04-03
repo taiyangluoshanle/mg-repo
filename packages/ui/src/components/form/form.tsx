@@ -1,49 +1,76 @@
+"use client";
+
 import * as React from "react";
+import { Form as BaseForm } from "@base-ui/react/form";
+import { Field } from "@base-ui/react/field";
 import { cn } from "@mg/utils";
 
 const Form = React.forwardRef<
   HTMLFormElement,
-  React.ComponentPropsWithoutRef<"form">
+  React.ComponentPropsWithoutRef<typeof BaseForm>
 >(({ className, ...props }, ref) => (
-  <form ref={ref} className={cn("space-y-4", className)} {...props} />
+  <BaseForm ref={ref} className={cn("space-y-4", className)} {...props} />
 ));
-
 Form.displayName = "Form";
 
 const FormField = React.forwardRef<
   HTMLDivElement,
-  React.ComponentPropsWithoutRef<"div">
+  React.ComponentPropsWithoutRef<typeof Field.Root>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("space-y-1.5", className)} {...props} />
+  <Field.Root ref={ref} className={cn("space-y-1.5", className)} {...props} />
 ));
-
 FormField.displayName = "FormField";
 
 const FormLabel = React.forwardRef<
-  HTMLLabelElement,
-  React.ComponentPropsWithoutRef<"label">
+  HTMLElement,
+  React.ComponentPropsWithoutRef<typeof Field.Label>
 >(({ className, ...props }, ref) => (
-  <label
+  <Field.Label
     ref={ref}
     className={cn("text-sm font-medium text-foreground", className)}
     {...props}
   />
 ));
-
 FormLabel.displayName = "FormLabel";
+
+function mergeRefs<T>(
+  ...refs: Array<React.Ref<T> | undefined>
+): React.RefCallback<T> {
+  return (node) => {
+    for (const r of refs) {
+      if (r == null) continue;
+      if (typeof r === "function") {
+        r(node);
+      } else {
+        (r as React.MutableRefObject<T | null>).current = node;
+      }
+    }
+  };
+}
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.ComponentPropsWithoutRef<"p">
 >(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    role="alert"
-    className={cn("text-sm text-destructive", className)}
-    {...props}
+  <Field.Error
+    render={(htmlProps) => {
+      const { ref: innerRef, className: innerClassName, ...rest } = htmlProps;
+      return (
+        <p
+          role="alert"
+          {...props}
+          {...rest}
+          ref={mergeRefs(ref, innerRef)}
+          className={cn(
+            "text-sm text-destructive",
+            className,
+            innerClassName,
+          )}
+        />
+      );
+    }}
   />
 ));
-
 FormMessage.displayName = "FormMessage";
 
 export { Form, FormField, FormLabel, FormMessage };

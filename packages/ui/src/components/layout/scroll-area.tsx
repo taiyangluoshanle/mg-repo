@@ -1,29 +1,50 @@
+"use client";
+
 import { forwardRef } from "react";
+import { ScrollArea } from "@base-ui/react/scroll-area";
 import { cn } from "@mg/utils";
 
-type ScrollAreaProps = React.HTMLAttributes<HTMLDivElement> & {
+type ScrollAreaProps = React.ComponentPropsWithoutRef<typeof ScrollArea.Root> & {
   orientation?: "horizontal" | "vertical" | "both";
 };
 
-const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
+const ScrollAreaComponent = forwardRef<HTMLDivElement, ScrollAreaProps>(
   ({ className, orientation = "vertical", children, ...props }, ref) => {
+    const showVertical = orientation === "vertical" || orientation === "both";
+    const showHorizontal = orientation === "horizontal" || orientation === "both";
+
     return (
-      <div
+      <ScrollArea.Root
         ref={ref}
-        className={cn(
-          "scrollbar-hidden",
-          orientation === "vertical" && "overflow-y-auto overflow-x-hidden",
-          orientation === "horizontal" && "overflow-x-auto overflow-y-hidden",
-          orientation === "both" && "overflow-auto",
-          className,
-        )}
+        className={cn("relative overflow-hidden", className)}
         {...props}
       >
-        {children}
-      </div>
+        <ScrollArea.Viewport className="size-full rounded-[inherit]">
+          {children}
+        </ScrollArea.Viewport>
+        {showVertical ? (
+          <ScrollArea.Scrollbar
+            orientation="vertical"
+            className="flex touch-none select-none bg-transparent p-0.5 transition-colors data-hovering:bg-surface-hover data-scrolling:bg-surface-hover"
+          >
+            <ScrollArea.Thumb className="relative flex-1 rounded-full bg-border" />
+          </ScrollArea.Scrollbar>
+        ) : null}
+        {showHorizontal ? (
+          <ScrollArea.Scrollbar
+            orientation="horizontal"
+            className="flex touch-none select-none bg-transparent p-0.5 transition-colors data-hovering:bg-surface-hover data-scrolling:bg-surface-hover"
+          >
+            <ScrollArea.Thumb className="relative flex-1 rounded-full bg-border" />
+          </ScrollArea.Scrollbar>
+        ) : null}
+        {showVertical && showHorizontal ? (
+          <ScrollArea.Corner className="bg-transparent" />
+        ) : null}
+      </ScrollArea.Root>
     );
   },
 );
-ScrollArea.displayName = "ScrollArea";
+ScrollAreaComponent.displayName = "ScrollArea";
 
-export { ScrollArea, type ScrollAreaProps };
+export { ScrollAreaComponent as ScrollArea, type ScrollAreaProps };
