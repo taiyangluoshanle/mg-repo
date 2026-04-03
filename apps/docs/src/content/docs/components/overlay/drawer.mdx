@@ -1,0 +1,41 @@
+---
+title: Drawer
+description: 侧边抽屉面板，从指定方向滑入。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <DrawerBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Drawer } from '@mg/ui';
+
+export default function Demo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>打开抽屉</button>
+      <Drawer open={open} onOpenChange={setOpen} side="right">
+        <p>抽屉内容</p>
+      </Drawer>
+    </>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `open` | `boolean` | `-` | 是否打开 |
+| `onOpenChange` | `(open: boolean) => void` | `-` | 状态变更回调 |
+| `side` | `"left" \| "right" \| "top" \| "bottom"` | `"right"` | 滑入方向 |
+| `children` | `ReactNode` | `-` | 抽屉内容 |

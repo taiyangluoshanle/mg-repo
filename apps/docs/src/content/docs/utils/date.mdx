@@ -1,0 +1,119 @@
+---
+title: 日期工具
+description: 模式化日期格式化、中文相对时间、今日/昨日判断与日期间隔天数；统一支持 Date / 字符串 / 时间戳。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+### 类型：DateInput
+
+所有日期相关函数接受的输入类型为：
+
+```ts
+import type { DateInput } from '@mg/utils';
+
+// DateInput = Date | string | number
+```
+
+### formatDate
+
+使用模式字符串格式化本地时间。支持的占位符：`YYYY`、`YY`、`MM`、`DD`、`HH`、`mm`、`ss`。
+
+```ts
+import { formatDate } from '@mg/utils';
+
+formatDate(new Date(), 'YYYY-MM-DD'); // 如 '2026-04-02'
+formatDate(Date.now(), 'YYYY-MM-DD HH:mm:ss');
+formatDate('2026-01-15', 'YY/MM/DD');
+```
+
+无效日期会解析失败，函数返回空字符串 `''`。
+
+### formatRelativeTime
+
+相对「参考时间」的中文描述，默认参考时间为当前时间。若 `input` 晚于 `reference`（未来时间），返回 `刚刚`；解析失败返回 `''`。
+
+```ts
+import { formatRelativeTime } from '@mg/utils';
+
+// 与「现在」比较
+formatRelativeTime(somePastDate); // 如 "刚刚"、"5秒前"、"3分钟前"、"2小时前"、"昨天"、"3天前"、"2周前"、"3个月前"、"1年前"
+
+// 指定参考时刻
+formatRelativeTime('2026-01-01', '2026-01-03'); // "2天前"
+```
+
+### isToday / isYesterday
+
+按**本地时区**日历日判断。
+
+```ts
+import { isToday, isYesterday } from '@mg/utils';
+
+isToday(new Date());
+isYesterday('2026-04-01');
+```
+
+### daysBetween
+
+返回两个时刻之间相差的**完整本地日历日**数（非负）；任一输入无效时返回 `null`。
+
+```ts
+import { daysBetween } from '@mg/utils';
+
+daysBetween('2026-04-01', '2026-04-05'); // 4
+```
+
+### 按需批量导入
+
+```ts
+import {
+  formatDate,
+  formatRelativeTime,
+  isToday,
+  isYesterday,
+  daysBetween,
+} from '@mg/utils';
+import type { DateInput } from '@mg/utils';
+```
+
+## API
+
+| 名称 | 签名 | 说明 |
+| --- | --- | --- |
+| `DateInput`（类型） | `Date \| string \| number` | 日期入参联合类型 |
+| `formatDate` | `(input: DateInput, pattern: string) => string` | 按模式格式化；无效返回 `''` |
+| `formatRelativeTime` | `(input: DateInput, reference?: DateInput) => string` | 中文相对时间；`reference` 默认 `new Date()` |
+| `isToday` | `(input: DateInput) => boolean` | 是否为今天（本地） |
+| `isYesterday` | `(input: DateInput) => boolean` | 是否为昨天（本地） |
+| `daysBetween` | `(a: DateInput, b: DateInput) => number \| null` | 间隔整天数；无效为 `null` |
+
+### formatDate 占位符
+
+| 占位符 | 含义 | 示例 |
+| --- | --- | --- |
+| `YYYY` | 四位年份 | `2026` |
+| `YY` | 两位年份 | `26` |
+| `MM` | 两位月份 | `04` |
+| `DD` | 两位日期 | `02` |
+| `HH` | 两位小时（24h） | `14` |
+| `mm` | 两位分钟 | `05` |
+| `ss` | 两位秒 | `09` |
+
+### 参数与返回值
+
+| 函数 | 参数 | 返回值 |
+| --- | --- | --- |
+| `formatDate` | `input` 日期；`pattern` 含上表占位符 | 格式化字符串或 `''` |
+| `formatRelativeTime` | `input`；可选 `reference` | 中文相对描述或 `''` |
+| `isToday` | `input` | 布尔 |
+| `isYesterday` | `input` | 布尔 |
+| `daysBetween` | `a`、`b` | 非负整数或 `null` |
+
+包内还提供 `parseDateInput(input: DateInput): Date | null`，用于手动解析日期。

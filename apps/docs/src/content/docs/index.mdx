@@ -1,0 +1,48 @@
+---
+title: 快速开始
+description: 了解如何在项目中使用 MG Design System
+---
+
+## 安装
+
+使用 pnpm 安装核心依赖：
+
+```bash
+pnpm add @mg/ui @mg/utils @mg/tailwind-config
+```
+
+## 配置 TailwindCSS
+
+在项目的 `tailwind.config.ts` 中引入 preset：
+
+```typescript
+import mgPreset from '@mg/tailwind-config/preset';
+import type { Config } from 'tailwindcss';
+
+export default {
+  presets: [mgPreset],
+  content: [
+    './src/**/*.{ts,tsx}',
+    './node_modules/@mg/ui/dist/**/*.{js,mjs}',
+  ],
+} satisfies Config;
+```
+
+## 引入基础样式
+
+```css
+@import '@mg/tailwind-config/base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## 使用组件
+
+```tsx
+import { Button } from '@mg/ui';
+
+export default function App() {
+  return <Button variant="primary">开始使用</Button>;
+}
+```

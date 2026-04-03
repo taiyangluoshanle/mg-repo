@@ -1,0 +1,4 @@
+{
+  "title": "电商组件",
+  "pages": ["product", "price", "cart", "order", "promotion"]
+}

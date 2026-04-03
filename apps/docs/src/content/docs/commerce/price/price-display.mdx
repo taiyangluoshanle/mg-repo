@@ -1,0 +1,36 @@
+---
+title: PriceDisplay
+description: 价格展示：突出当前价，可选划线原价与根据差额计算的「省 X%」徽章。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { PriceDisplay } from '@mg/ui-commerce';
+
+export default function Demo() {
+  return (
+    <PriceDisplay
+      original={199}
+      current={99}
+      currency="¥"
+    />
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `original` | `number` | — | 原价；仅当大于 `current` 时显示划线价与折扣比例 |
+| `current` | `number` | — | 当前售价（必填） |
+| `currency` | `string` | `"¥"` | 货币符号（如 `¥`）或展示用代码，用于内部金额格式化 |
+
+除上表外，组件继承根元素的 HTML 属性（如 `className`）。

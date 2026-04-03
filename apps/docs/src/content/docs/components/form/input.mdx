@@ -1,0 +1,31 @@
+---
+title: Input
+description: 单行文本输入框，支持默认/错误变体、三种尺寸，以及前后缀装饰节点。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+```tsx
+import { Input } from '@mg/ui';
+
+export default function Demo() {
+  return <Input placeholder="请输入" variant="default" size="md" />;
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `variant` | `"default" \| "error"` | `"default"` | 边框与聚焦环样式 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 输入框高度与内边距 |
+| `startAdornment` | `React.ReactNode` | `-` | 左侧装饰（如图标），会为输入区增加左内边距 |
+| `endAdornment` | `React.ReactNode` | `-` | 右侧装饰 |
+| `className` | `string` | `-` | 附加到 `input` 的类名 |
+| 其他 | `Omit<React.ComponentPropsWithoutRef<"input">, "size">` | `-` | 继承原生 `input` 属性（`value`、`onChange`、`disabled` 等） |

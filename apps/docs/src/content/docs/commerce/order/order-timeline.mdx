@@ -1,0 +1,36 @@
+---
+title: OrderTimeline
+description: 订单物流/节点时间轴，纵向时间线展示时间与标题，可选描述段落。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { OrderTimeline } from '@mg/ui-commerce';
+
+export default function Demo() {
+  return (
+    <OrderTimeline
+      events={[
+        { time: '2026-04-02 10:00', title: '商家已发货', description: '承运商：示例快递' },
+        { time: '2026-04-01 18:30', title: '仓库拣货完成' },
+        { time: '2026-04-01 09:00', title: '订单已支付' },
+      ]}
+    />
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `events` | `Array<{ time: string; title: string; description?: string }>` | — | 时间轴节点列表，按展示顺序排列（首项高亮为当前最新节点样式） |
+
+除上表外，组件继承根 `ul` 元素的 HTML 属性（如 `className`）。

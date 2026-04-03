@@ -1,0 +1,65 @@
+---
+title: Card
+description: 卡片容器及页眉、标题、描述、内容与页脚等组合子组件，用于信息分组展示。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Card className="max-w-md">
+      <CardHeader>
+        <CardTitle>卡片标题</CardTitle>
+        <CardDescription>这是一段简短说明，用于补充上下文。</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p>主体内容区域。</p>
+      </CardContent>
+      <CardFooter>
+        <span className="text-sm text-foreground-secondary">页脚操作区</span>
+      </CardFooter>
+    </Card>
+  );
+}
+```
+
+## API
+
+### Card
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| `className` | `string` | 附加类名 |
+| 其他 | `HTMLAttributes<HTMLDivElement>` | 原生 `div` 属性 |
+
+### CardHeader / CardContent / CardFooter
+
+与 `Card` 相同，均为 `HTMLAttributes<HTMLDivElement>`。
+
+### CardTitle
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| 其他 | `HTMLAttributes<HTMLHeadingElement>` | 渲染为 `h3` |
+
+### CardDescription
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| 其他 | `HTMLAttributes<HTMLParagraphElement>` | 渲染为 `p` |

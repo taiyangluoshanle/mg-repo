@@ -1,0 +1,93 @@
+---
+title: Dialog
+description: 模态对话框，通过 Portal 挂载到 `document.body`，支持遮罩点击与 Esc 关闭，可组合标题、描述与底部操作区。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <DialogBasicDemo />
+</ComponentPreview>
+
+```tsx
+import {
+  Dialog,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from '@mg/ui';
+import { useState } from 'react';
+
+export default function Demo() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)}>
+        打开对话框
+      </button>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogHeader>
+          <DialogTitle>确认操作</DialogTitle>
+          <DialogDescription>此操作不可撤销，是否继续？</DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <button type="button" onClick={() => setOpen(false)}>
+            取消
+          </button>
+          <DialogClose aria-label="关闭">×</DialogClose>
+        </DialogFooter>
+      </Dialog>
+    </>
+  );
+}
+```
+
+## API
+
+### Dialog
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `open` | `boolean` | — | **必填**，是否显示对话框 |
+| `onOpenChange` | `(open: boolean) => void` | — | **必填**，显隐状态变化（遮罩、Esc 等会调用） |
+| `children` | `React.ReactNode` | — | 对话框内部内容 |
+| `className` | `string` | — | 应用于内容面板的样式类名 |
+
+### DialogHeader / DialogFooter
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | — | 布局容器 |
+
+### DialogTitle
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLHeadingElement>` | — | 渲染为 `h2` |
+
+### DialogDescription
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLParagraphElement>` | — | 渲染为 `p` |
+
+### DialogClose
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `type` | `string` | `"button"` | 按钮类型 |
+| `onClick` | `React.MouseEventHandler<HTMLButtonElement>` | — | 点击后若未 `preventDefault`，会调用 `onOpenChange(false)` |
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.ButtonHTMLAttributes<HTMLButtonElement>` | — | **必须在 `Dialog` 内使用** |

@@ -1,0 +1,69 @@
+---
+title: Tabs
+description: 标签页复合组件，用于在同一区域内切换多组内容，支持受控与非受控模式。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+```tsx
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Tabs defaultValue="a">
+      <TabsList>
+        <TabsTrigger value="a">概览</TabsTrigger>
+        <TabsTrigger value="b">详情</TabsTrigger>
+      </TabsList>
+      <TabsContent value="a">这里是「概览」面板内容。</TabsContent>
+      <TabsContent value="b">这里是「详情」面板内容。</TabsContent>
+    </Tabs>
+  );
+}
+```
+
+## API
+
+### Tabs
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `defaultValue` | `string` | `""` | 非受控模式下初始选中的标签值 |
+| `value` | `string` | — | 受控模式下的当前选中值 |
+| `onValueChange` | `(value: string) => void` | — | 切换标签时的回调 |
+| `className` | `string` | — | 根容器样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | — | 透传至外层 `div` |
+
+### TabsList
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | — | 透传至 `div`（`role="tablist"`） |
+
+### TabsTrigger
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `value` | `string` | — | **必填**，对应 `TabsContent` 的 `value` |
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.ButtonHTMLAttributes<HTMLButtonElement>` | — | 透传至 `button` |
+
+### TabsContent
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `value` | `string` | — | **必填**，与当前选中 `TabsTrigger` 的 `value` 一致时显示 |
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | — | 透传至 `div`（`role="tabpanel"`） |

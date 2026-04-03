@@ -1,0 +1,108 @@
+---
+title: 字符串工具
+description: 截断、首字母大写、slug、HTML 转义与 camel/kebab 互转等常用字符串处理函数。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+### truncate
+
+按最大长度截断字符串，超出部分可追加后缀（默认 `...`）。
+
+```ts
+import { truncate } from '@mg/utils';
+
+truncate('Hello World', 8); // 'Hello...'
+truncate('Hello World', 8, '…'); // 'Hello W…'
+```
+
+### capitalize
+
+将首字符转为大写，其余字符保持不变。
+
+```ts
+import { capitalize } from '@mg/utils';
+
+capitalize('hello'); // 'Hello'
+```
+
+### slugify
+
+转为 URL 友好的短横线连接小写 slug。
+
+```ts
+import { slugify } from '@mg/utils';
+
+slugify('Hello World!'); // 'hello-world'
+```
+
+### escapeHtml
+
+转义 HTML 特殊字符，适合插入文本节点，降低 XSS 风险。
+
+```ts
+import { escapeHtml } from '@mg/utils';
+
+escapeHtml('<script>'); // 转义后的安全字符串
+```
+
+### camelToKebab
+
+将 camelCase / PascalCase 转为 kebab-case。
+
+```ts
+import { camelToKebab } from '@mg/utils';
+
+camelToKebab('fooBar'); // 'foo-bar'
+```
+
+### kebabToCamel
+
+将 kebab-case 转为 camelCase。
+
+```ts
+import { kebabToCamel } from '@mg/utils';
+
+kebabToCamel('foo-bar'); // 'fooBar'
+```
+
+### 按需批量导入
+
+```ts
+import {
+  truncate,
+  capitalize,
+  slugify,
+  escapeHtml,
+  camelToKebab,
+  kebabToCamel,
+} from '@mg/utils';
+```
+
+## API
+
+| 函数 | 签名 | 说明 |
+| --- | --- | --- |
+| `truncate` | `(str: string, maxLength: number, suffix?: string) => string` | 超过 `maxLength` 时截断并追加 `suffix`（可选） |
+| `capitalize` | `(str: string) => string` | 首字符大写 |
+| `slugify` | `(str: string) => string` | 生成 URL 友好 slug |
+| `escapeHtml` | `(str: string) => string` | HTML 转义 |
+| `camelToKebab` | `(str: string) => string` | camel → kebab |
+| `kebabToCamel` | `(str: string) => string` | kebab → camel |
+
+### 参数与返回值
+
+| 函数 | 参数 | 返回值 |
+| --- | --- | --- |
+| `truncate` | `str` 原字符串；`maxLength` 最大长度；`suffix` 可选，默认 `'...'` | 截断后的字符串 |
+| `capitalize` | `str` | 首字母大写的字符串 |
+| `slugify` | `str` | 小写、连字符分隔的 slug |
+| `escapeHtml` | `str` | 转义后的字符串 |
+| `camelToKebab` | `str` | kebab-case 字符串 |
+| `kebabToCamel` | `str` | camelCase 字符串 |

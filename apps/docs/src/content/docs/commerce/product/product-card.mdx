@@ -1,0 +1,40 @@
+---
+title: ProductCard
+description: 商品卡片，展示主图、标题、价格与标签，可选点击跳转或打开详情。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { ProductCard } from '@mg/ui-commerce';
+
+export default function Demo() {
+  return (
+    <ProductCard
+      image="https://example.com/product.jpg"
+      title="示例商品名称"
+      price="¥99.00"
+      tags={['新品', '包邮']}
+      onClick={() => console.log('open detail')}
+    />
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `image` | `string` | — | 商品主图 URL |
+| `title` | `string` | — | 商品标题 |
+| `price` | `React.ReactNode` | — | 价格展示内容，可传入格式化后的字符串或自定义节点 |
+| `tags` | `string[]` | `[]` | 标签文案列表，以徽章形式展示 |
+| `onClick` | `() => void` | — | 点击整张卡片时的回调；传入后卡片可聚焦并支持键盘激活 |
+
+除上表外，组件继承根元素的 HTML 属性（如 `className`）。

@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+coverage/
+.changeset/*.md
+!.changeset/config.json
+.screenshots/
+.cursor/

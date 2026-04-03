@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+@import "@mg/tailwind-config/base.css";
+
+@source "../../node_modules/@mg/ui/dist";
+@source "../../node_modules/@mg/ui-commerce/dist";
+
+@theme inline {
+  /* ── Brand ── */
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-subtle: var(--brand-subtle);
+
+  /* ── Background ── */
+  --color-background: var(--bg-primary);
+  --color-background-secondary: var(--bg-secondary);
+  --color-background-tertiary: var(--bg-tertiary);
+  --color-background-inverse: var(--bg-inverse);
+
+  /* ── Foreground ── */
+  --color-foreground: var(--fg-primary);
+  --color-foreground-secondary: var(--fg-secondary);
+  --color-foreground-muted: var(--fg-muted);
+  --color-foreground-inverse: var(--fg-inverse);
+
+  /* ── Semantic ── */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+
+  /* ── Surface & Border ── */
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  /* ── Raw Blue Palette ── */
+  --color-blue-50: #e8f0fe;
+  --color-blue-100: #e1effe;
+  --color-blue-200: #c3ddfd;
+  --color-blue-300: #a4cafe;
+  --color-blue-400: #2997ff;
+  --color-blue-500: #0077ed;
+  --color-blue-600: #0071e3;
+  --color-blue-700: #0066cc;
+  --color-blue-800: #1959b3;
+  --color-blue-900: #233876;
+
+  /* ── Raw Neutral Palette ── */
+  --color-neutral-50: #fafafc;
+  --color-neutral-100: #f5f5f7;
+  --color-neutral-200: #e9e9ed;
+  --color-neutral-300: #d2d2d7;
+  --color-neutral-400: #9a9a9e;
+  --color-neutral-500: #86868b;
+  --color-neutral-600: #6e6e73;
+  --color-neutral-700: #424245;
+  --color-neutral-800: #333336;
+  --color-neutral-900: #1d1d1f;
+  --color-neutral-950: #161617;
+
+  /* ── Typography ── */
+  --font-display: "Sora", "Noto Sans SC", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* ═══════════════════════════════════════════
+   MG Design System — Ink & Blue customizations
+   ═══════════════════════════════════════════ */
+
+/* ── Noise texture overlay ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ── Section heading blue bar ── */
+.prose h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prose h2::before {
+  content: "";
+  flex-shrink: 0;
+  width: 4px;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #2997ff, #0066cc);
+}
+
+/* ── API table styling ── */
+.prose table {
+  border: 1px solid var(--neutral-700);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.prose th {
+  background: var(--neutral-900);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--neutral-400);
+}
+
+.prose td {
+  border-color: var(--neutral-800);
+}
+
+.prose td code {
+  color: #2997ff;
+  font-size: 0.8rem;
+}
+
+/* ── Code block border ── */
+.prose pre {
+  border: 1px solid var(--neutral-700);
+  border-radius: 10px;
+}
+
+/* ── Sidebar active item blue accent ── */
+[data-active="true"] {
+  color: #2997ff !important;
+}
+
+/* ── TOC active item blue accent ── */
+[data-active] .text-fd-primary {
+  color: #2997ff;
+}
+
+/* ── Inline code styling ── */
+.prose :not(pre) > code {
+  color: #2997ff;
+  background: rgba(41, 151, 255, 0.08);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.85em;
+}

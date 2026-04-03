@@ -1,0 +1,49 @@
+---
+title: Sheet
+description: 底部抽屉式面板（常见于移动端），从屏幕下方滑出，带圆角与最大高度限制，适合操作表、详情摘要等。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <SheetBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Sheet } from '@mg/ui';
+import { useState } from 'react';
+
+export default function Demo() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)}>
+        打开底部面板
+      </button>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <h2 className="text-lg font-semibold">底部 Sheet</h2>
+        <p className="mt-2 text-sm text-foreground-secondary">适合移动端或需要底部弹层的场景。</p>
+      </Sheet>
+    </>
+  );
+}
+```
+
+## API
+
+### Sheet
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `open` | `boolean` | — | **必填**，是否显示底部面板 |
+| `onOpenChange` | `(open: boolean) => void` | — | **必填**，显隐状态变化（遮罩、Esc 会关闭） |
+| `children` | `React.ReactNode` | — | 面板内容 |
+| `className` | `string` | — | 应用于面板的样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | — | 透传至面板 `div`（`role="dialog"`） |

@@ -1,0 +1,38 @@
+---
+title: Link
+description: 文本链接，支持默认与弱化样式；外链可一键开启新标签页与安全 rel。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <LinkBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Link } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Link href="/docs" variant="default">
+      示例链接
+    </Link>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `variant` | `"default" \| "muted"` | `"default"` | 链接颜色与悬停样式 |
+| `external` | `boolean` | `false` | 为 `true` 时设置 `target="_blank"`，未传 `rel` 时默认 `noopener noreferrer` |
+| `href` | `string` | `-` | 链接地址 |
+| `className` | `string` | `-` | 附加类名 |
+| 其他 | `React.AnchorHTMLAttributes<HTMLAnchorElement>` | `-` | 继承原生 `<a>` 属性（如 `target`、`rel` 可与 `external` 配合） |

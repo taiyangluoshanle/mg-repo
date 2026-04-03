@@ -1,0 +1,45 @@
+---
+title: SkuSelector
+description: SKU 规格选择器，按维度（如颜色、尺码）分组展示可选值，并维护当前选中映射。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { useState } from 'react';
+import { SkuSelector } from '@mg/ui-commerce';
+
+export default function Demo() {
+  const [value, setValue] = useState<Record<string, string>>({
+    颜色: '黑色',
+    尺码: 'M',
+  });
+
+  return (
+    <SkuSelector
+      options={[
+        { name: '颜色', values: ['黑色', '白色'] },
+        { name: '尺码', values: ['S', 'M', 'L'] },
+      ]}
+      value={value}
+      onValueChange={setValue}
+    />
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `options` | `Array<{ name: string; values: string[] }>` | — | 规格维度列表，`name` 为维度名，`values` 为可选值 |
+| `value` | `Record<string, string>` | — | 当前选中项，键为维度名，值为该维度下选中的规格文案 |
+| `onValueChange` | `(next: Record<string, string>) => void` | — | 选中变化时回调，传入完整的新映射 |
+
+除上表外，组件继承根元素的 HTML 属性（如 `className`）。该组件需在客户端环境中使用。

@@ -1,0 +1,59 @@
+---
+title: Tooltip
+description: 鼠标悬停或键盘聚焦时延迟展示的提示文案，由 `TooltipTrigger` 与 `TooltipContent` 组合使用。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <TooltipBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Tooltip, TooltipTrigger, TooltipContent } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Tooltip delayDuration={400}>
+      <TooltipTrigger className="cursor-default underline">
+        悬停查看提示
+      </TooltipTrigger>
+      <TooltipContent>这是一条 Tooltip 说明</TooltipContent>
+    </Tooltip>
+  );
+}
+```
+
+## API
+
+### Tooltip
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `children` | `React.ReactNode` | — | 需包含 `TooltipTrigger` 与 `TooltipContent` |
+| `delayDuration` | `number` | `400` | 显示前延迟（毫秒） |
+| `defaultOpen` | `boolean` | `false` | 非受控初始是否显示 |
+| `open` | `boolean` | — | 受控模式下是否显示 |
+| `onOpenChange` | `(open: boolean) => void` | — | 显隐变化回调 |
+| `showArrow` | `boolean` | `false` | 是否在内容上显示小三角（可被 `TooltipContent` 覆盖） |
+
+### TooltipTrigger
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLSpanElement>` | — | 包裹触发区域；内部可放按钮等；**必须在 `Tooltip` 内** |
+
+### TooltipContent
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `showArrow` | `boolean` | — | 是否显示箭头；未传时使用 `Tooltip` 的 `showArrow` |
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | — | 提示层（`role="tooltip"`） |

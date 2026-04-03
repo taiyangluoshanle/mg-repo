@@ -1,0 +1,4 @@
+{
+  "title": "Product",
+  "pages": ["product-card", "product-gallery", "sku-selector", "quantity-stepper", "product-rating"]
+}

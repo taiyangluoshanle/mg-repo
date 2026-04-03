@@ -1,0 +1,38 @@
+---
+title: CartSummary
+description: 购物车金额汇总：商品小计、运费（或免运费）、可选优惠与合计。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { CartSummary } from '@mg/ui-commerce';
+
+export default function Demo() {
+  return (
+    <CartSummary
+      subtotal={199}
+      shipping="free"
+      discount={20}
+      total={179}
+    />
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `subtotal` | `number` | — | 商品小计金额 |
+| `shipping` | `number \| "free"` | — | 运费金额；为 `"free"` 时展示「免运费」 |
+| `discount` | `number` | — | 优惠金额；未传或不大于 0 时不展示优惠行 |
+| `total` | `number` | — | 应付合计 |
+
+除上表外，组件继承根元素的 HTML 属性（如 `className`）。组件内部固定使用 `¥` 格式化金额。

@@ -1,0 +1,44 @@
+---
+title: Avatar
+description: 展示用户头像；支持图片地址与加载失败时的首字母/缩写回退。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <AvatarBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Avatar } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <div className="flex flex-wrap items-center gap-4">
+      <Avatar src="/avatar.png" alt="张三" fallback="张三" size="sm" />
+      <Avatar fallback="Li Si" size="md" />
+      <Avatar fallback="王 五" size="lg" />
+      <Avatar fallback="Team Alpha" size="xl" />
+    </div>
+  );
+}
+```
+
+当 `src` 缺失或图片加载失败时，会根据 `fallback` 文案自动生成缩写（两个词取首字母，否则取前两个字符）。
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `src` | `string` | — | 图片地址 |
+| `alt` | `string` | `""` | 图片替代文本 |
+| `fallback` | `string` | （必填） | 回退展示用文案，用于生成首字母/缩写 |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | 头像尺寸 |
+| `className` | `string` | — | 附加类名 |
+| 其他 | `HTMLAttributes<HTMLDivElement>` | — | 外层容器原生属性 |

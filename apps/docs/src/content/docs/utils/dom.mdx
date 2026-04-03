@@ -1,0 +1,94 @@
+---
+title: DOM 工具
+description: 剪贴板复制、滚动定位、读取滚动偏移与判断元素是否在视口内。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+仅在浏览器环境调用；部分 API 在缺少 `window` 时会返回安全默认值。
+
+### copyToClipboard
+
+优先使用异步剪贴板 API，不可用时回退到 `execCommand`。
+
+```ts
+import { copyToClipboard } from '@mg/utils';
+
+const ok = await copyToClipboard('要复制的文本');
+```
+
+### scrollTo
+
+可传入垂直像素位置，或传入 `Element` 将元素顶部滚入视口；支持 `behavior` 与额外 `offset`。
+
+```ts
+import { scrollTo } from '@mg/utils';
+
+scrollTo(0);
+scrollTo(document.getElementById('section')!, { behavior: 'smooth', offset: -64 });
+```
+
+### getScrollPosition
+
+返回当前窗口滚动偏移；无 `window` 时为 `{ x: 0, y: 0 }`。
+
+```ts
+import { getScrollPosition } from '@mg/utils';
+
+const { x, y } = getScrollPosition();
+```
+
+### isInViewport
+
+根据 `getBoundingClientRect` 判断元素是否有任意部分落在可视区域内。
+
+```ts
+import { isInViewport } from '@mg/utils';
+
+const el = document.querySelector('.card');
+if (el && isInViewport(el)) {
+  // ...
+}
+```
+
+### 按需批量导入
+
+```ts
+import {
+  copyToClipboard,
+  scrollTo,
+  getScrollPosition,
+  isInViewport,
+} from '@mg/utils';
+```
+
+## API
+
+| 函数 | 签名 | 说明 |
+| --- | --- | --- |
+| `copyToClipboard` | `(text: string) => Promise<boolean>` | 复制文本，成功为 `true` |
+| `scrollTo` | `(target: Element \| number, options?: { behavior?: ScrollBehavior; offset?: number }) => void` | 滚到像素或元素顶部（可加偏移） |
+| `getScrollPosition` | `() => { x: number; y: number }` | 当前窗口滚动位置 |
+| `isInViewport` | `(el: Element) => boolean` | 是否与视口相交 |
+
+### scrollTo 的 options
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| `behavior` | `ScrollBehavior` | 如 `'smooth'`、`'auto'` |
+| `offset` | `number` | 相对视口顶部的额外偏移（像素） |
+
+### 参数与返回值
+
+| 函数 | 参数 | 返回值 |
+| --- | --- | --- |
+| `copyToClipboard` | `text` | `Promise<boolean>` |
+| `scrollTo` | `target` 为数字表示 `scrollY`，为元素则滚到该元素；`options` 可选 | `void` |
+| `getScrollPosition` | 无 | `{ x, y }` |
+| `isInViewport` | `el` DOM 元素 | 是否在视口内 |

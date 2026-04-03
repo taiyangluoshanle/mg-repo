@@ -1,0 +1,111 @@
+---
+title: 类型守卫
+description: 在运行时收窄 TypeScript 类型：已定义、字符串、数字、纯对象、数组与函数。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+守卫函数在条件分支中收窄类型，便于安全访问属性或调用。
+
+### isDefined
+
+排除 `null` 与 `undefined`。
+
+```ts
+import { isDefined } from '@mg/utils';
+
+function greet(name: string | undefined) {
+  if (!isDefined(name)) return;
+  name.toUpperCase();
+}
+```
+
+### isString / isNumber
+
+```ts
+import { isString, isNumber } from '@mg/utils';
+
+function parse(input: unknown) {
+  if (isString(input)) return input.trim();
+  if (isNumber(input)) return input.toFixed(2);
+}
+```
+
+`isNumber` 仅在值为**有限数字**时为真（排除 `NaN` 与非 number）。
+
+### isObject
+
+纯对象：`typeof value === 'object'` 且非 `null`、非数组。
+
+```ts
+import { isObject } from '@mg/utils';
+
+if (isObject(data)) {
+  // data: Record<string, unknown>
+}
+```
+
+### isArray
+
+基于 `Array.isArray`，可指定元素类型形参 `T`。
+
+```ts
+import { isArray } from '@mg/utils';
+
+if (isArray<string>(raw)) {
+  raw.forEach((s) => s.length);
+}
+```
+
+### isFunction
+
+任意可调用函数。
+
+```ts
+import { isFunction } from '@mg/utils';
+
+if (isFunction(maybeFn)) {
+  maybeFn();
+}
+```
+
+### 按需批量导入
+
+```ts
+import {
+  isDefined,
+  isString,
+  isNumber,
+  isObject,
+  isArray,
+  isFunction,
+} from '@mg/utils';
+```
+
+## API
+
+| 函数 | 签名 | 说明 |
+| --- | --- | --- |
+| `isDefined` | `<T>(value: T \| undefined \| null) => value is T` | 非 `null` / `undefined` |
+| `isString` | `(value: unknown) => value is string` | 字符串原始类型 |
+| `isNumber` | `(value: unknown) => value is number` | 有限数字 |
+| `isObject` | `(value: unknown) => value is Record<string, unknown>` | 非 null 非数组的对象 |
+| `isArray` | `<T = unknown>(value: unknown) => value is T[]` | 数组 |
+| `isFunction` | `(value: unknown) => value is (...args: unknown[]) => unknown` | 函数 |
+
+### 参数与返回值
+
+| 函数 | 参数 | 返回值 |
+| --- | --- | --- |
+| `isDefined` | 任意可能为空的值 | 类型谓词，真则收窄为 `T` |
+| `isString` | `unknown` | 真则为 `string` |
+| `isNumber` | `unknown` | 真则为 `number` |
+| `isObject` | `unknown` | 真则为 `Record<string, unknown>` |
+| `isArray` | `unknown` | 真则为 `T[]`（默认 `unknown[]`） |
+| `isFunction` | `unknown` | 真则为可调函数类型 |

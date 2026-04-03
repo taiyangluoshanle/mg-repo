@@ -1,0 +1,33 @@
+---
+title: DatePicker
+description: 日期选择输入，底层为 `type="date"`，样式与 Input 的变体、尺寸一致。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <DatePickerBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { DatePicker } from '@mg/ui';
+
+export default function Demo() {
+  return <DatePicker variant="default" size="md" />;
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `variant` | `"default" \| "error"` | `"default"` | 边框与聚焦环样式 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 高度与内边距 |
+| `className` | `string` | `-` | 附加到 `input` |
+| 其他 | `Omit<React.ComponentPropsWithoutRef<"input">, "size" \| "type">` | `-` | 继承原生日期输入属性（`value`、`onChange`、`min`、`max` 等）；`type` 固定为 `date` |

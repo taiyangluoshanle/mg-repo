@@ -1,0 +1,58 @@
+---
+title: AlertDialog
+description: 模态确认对话框，用于不可逆或重要操作前的二次确认；通过 Portal 挂载到 `document.body`。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+```tsx
+'use client';
+
+import { AlertDialog, Button } from '@mg/ui';
+import { useState } from 'react';
+
+export default function Demo() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="destructive" onClick={() => setOpen(true)}>
+        删除
+      </Button>
+      <AlertDialog
+        open={open}
+        onOpenChange={setOpen}
+        title="确认删除？"
+        description="此操作无法撤销。"
+        confirmText="删除"
+        cancelText="取消"
+        variant="destructive"
+        onConfirm={() => console.log('confirmed')}
+      />
+    </>
+  );
+}
+```
+
+点击遮罩或按 `Escape` 会关闭对话框（与取消类似，会调用 `onOpenChange(false)`）。确认会先执行 `onConfirm`，再关闭。
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `open` | `boolean` | （必填） | 是否显示 |
+| `onOpenChange` | `(open: boolean) => void` | （必填） | 显隐变化回调 |
+| `title` | `ReactNode` | （必填） | 标题 |
+| `description` | `ReactNode` | — | 说明文案 |
+| `confirmText` | `string` | `"Confirm"` | 确认按钮文案 |
+| `cancelText` | `string` | `"Cancel"` | 取消按钮文案 |
+| `onConfirm` | `() => void` | （必填） | 点击确认时调用，随后关闭 |
+| `onCancel` | `() => void` | — | 点击取消时额外调用，随后关闭 |
+| `variant` | `"default" \| "destructive"` | `"default"` | 确认按钮样式 |
+| `className` | `string` | — | 对话框面板类名 |

@@ -1,0 +1,36 @@
+---
+title: ScrollArea
+description: 可滚动区域，隐藏滚动条样式，支持纵向、横向或双向滚动。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <ScrollAreaBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { ScrollArea } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <ScrollArea className="h-40" orientation="vertical">
+      <div className="p-4">长内容示例…</div>
+    </ScrollArea>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `orientation` | `"horizontal" \| "vertical" \| "both"` | `"vertical"` | 滚动方向；`vertical` 为纵向滚动并隐藏横向溢出 |
+| `className` | `string` | `-` | 附加类名（通常需设置高度或最大高度以出现滚动） |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | `-` | 继承原生 `div` 属性 |

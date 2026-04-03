@@ -1,0 +1,28 @@
+---
+title: FlashSaleBadge
+description: 限时抢购/闪购角标，渐变背景配闪电图标，可自定义主文案。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { FlashSaleBadge } from '@mg/ui-commerce';
+
+export default function Demo() {
+  return <FlashSaleBadge />;
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `text` | `string` | `"限时特价"` | 徽章内展示文案 |
+
+除上表外，组件继承根 `span` 元素的 HTML 属性（如 `className`）。

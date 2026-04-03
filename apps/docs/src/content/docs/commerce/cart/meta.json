@@ -1,0 +1,4 @@
+{
+  "title": "Cart",
+  "pages": ["cart-item", "cart-summary", "cart-drawer"]
+}

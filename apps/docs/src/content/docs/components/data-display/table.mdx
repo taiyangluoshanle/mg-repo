@@ -1,0 +1,65 @@
+---
+title: Table
+description: 数据表格组合组件，包含表头、表体、行与单元格，带基础样式与悬停效果。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <TableBasicDemo />
+</ComponentPreview>
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>名称</TableHead>
+          <TableHead>状态</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>项目 A</TableCell>
+          <TableCell>进行中</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>项目 B</TableCell>
+          <TableCell>已完成</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}
+```
+
+`Table` 外层包含横向滚动容器，适合在窄屏下浏览宽表。
+
+## API
+
+| 组件 | 底层元素 | 属性 |
+|------|----------|------|
+| `Table` | `table` | `HTMLAttributes<HTMLTableElement>` |
+| `TableHeader` | `thead` | `HTMLAttributes<HTMLTableSectionElement>` |
+| `TableBody` | `tbody` | `HTMLAttributes<HTMLTableSectionElement>` |
+| `TableRow` | `tr` | `HTMLAttributes<HTMLTableRowElement>` |
+| `TableHead` | `th` | `ThHTMLAttributes<HTMLTableCellElement>` |
+| `TableCell` | `td` | `TdHTMLAttributes<HTMLTableCellElement>` |
+
+各组件均支持 `className` 等对应原生属性。

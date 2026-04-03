@@ -1,0 +1,38 @@
+---
+title: AddressCard
+description: 收货地址卡片：姓名、电话、详细地址，默认地址时显示「默认」徽章。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { AddressCard } from '@mg/ui-commerce';
+
+export default function Demo() {
+  return (
+    <AddressCard
+      name="张三"
+      phone="13800138000"
+      address="上海市浦东新区示例路 1 号"
+      isDefault
+    />
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `name` | `string` | — | 收货人姓名 |
+| `phone` | `string` | — | 联系电话 |
+| `address` | `string` | — | 完整收货地址 |
+| `isDefault` | `boolean` | — | 是否为默认地址；为 `true` 时展示绿色「默认」标签 |
+
+除上表外，组件继承根元素的 HTML 属性（如 `className`）。

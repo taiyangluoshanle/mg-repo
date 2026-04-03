@@ -1,0 +1,72 @@
+---
+title: 存储工具
+description: 对 localStorage 与 sessionStorage 的安全读写封装，自动 JSON 序列化并吞掉不可用环境异常。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+### localStorage：`safeGetItem` / `safeSetItem` / `safeRemoveItem`
+
+```ts
+import { safeGetItem, safeSetItem, safeRemoveItem } from '@mg/utils';
+
+type User = { id: string; name: string };
+
+// 读取：缺失、解析失败或 storage 不可用时返回 fallback
+const user = safeGetItem<User>('user', { id: '', name: '' });
+
+// 写入：成功返回 true
+const ok = safeSetItem('user', { id: '1', name: 'Ada' });
+
+// 删除：忽略不可用时的错误
+safeRemoveItem('user');
+```
+
+### sessionStorage：`sessionGet` / `sessionSet`
+
+```ts
+import { sessionGet, sessionSet } from '@mg/utils';
+
+const token = sessionGet<string>('token', '');
+sessionSet('token', 'abc123');
+```
+
+### 按需批量导入
+
+```ts
+import {
+  safeGetItem,
+  safeSetItem,
+  safeRemoveItem,
+  sessionGet,
+  sessionSet,
+} from '@mg/utils';
+```
+
+## API
+
+| 函数 | 签名 | 说明 |
+| --- | --- | --- |
+| `safeGetItem` | `<T>(key: string, fallback: T) => T` | 从 localStorage 读 JSON，失败返回 `fallback` |
+| `safeSetItem` | `(key: string, value: unknown) => boolean` | 写入 localStorage，成功为 `true` |
+| `safeRemoveItem` | `(key: string) => void` | 删除 localStorage 键 |
+| `sessionGet` | `<T>(key: string, fallback: T) => T` | 从 sessionStorage 读 JSON |
+| `sessionSet` | `(key: string, value: unknown) => boolean` | 写入 sessionStorage |
+
+### 参数与返回值
+
+| 函数 | 参数 | 返回值 |
+| --- | --- | --- |
+| `safeGetItem` | `key`；`fallback` 默认值/类型推断用 | 解析后的 `T` 或 `fallback` |
+| `safeSetItem` | `key`；`value` 将 `JSON.stringify` | 是否写入成功 |
+| `safeRemoveItem` | `key` | 无 |
+| `sessionGet` | `key`；`fallback` | 解析后的 `T` 或 `fallback` |
+| `sessionSet` | `key`；`value` | 是否写入成功 |
+
+在隐私模式、SSR 或禁用存储时，读操作会退回 `fallback`，写操作可能返回 `false`。

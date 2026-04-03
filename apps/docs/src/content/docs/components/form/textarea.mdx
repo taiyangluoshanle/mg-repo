@@ -1,0 +1,32 @@
+---
+title: Textarea
+description: 多行文本输入框，支持自动高度和限制拉伸方向。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <TextareaBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Textarea } from '@mg/ui';
+
+export default function Demo() {
+  return <Textarea placeholder="请输入内容..." />;
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `variant` | `"default" \| "error"` | `"default"` | 变体 |
+| `resize` | `"none" \| "vertical" \| "horizontal" \| "both"` | `"vertical"` | 拉伸方向 |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | 尺寸 |

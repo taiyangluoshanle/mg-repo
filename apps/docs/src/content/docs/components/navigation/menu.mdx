@@ -1,0 +1,58 @@
+---
+title: Menu
+description: 垂直侧边栏菜单复合组件，支持分组标题与可高亮的菜单项，适用于后台导航等场景。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+```tsx
+import { Menu, MenuGroup, MenuItem } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Menu>
+      <MenuGroup label="主导航">
+        <MenuItem active>仪表盘</MenuItem>
+        <MenuItem>项目</MenuItem>
+        <MenuItem>设置</MenuItem>
+      </MenuGroup>
+      <MenuGroup label="其他">
+        <MenuItem>帮助中心</MenuItem>
+      </MenuGroup>
+    </Menu>
+  );
+}
+```
+
+## API
+
+### Menu
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLUListElement>` | — | 透传至外层 `ul`（`role="menu"`） |
+
+### MenuGroup
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `label` | `string` | — | **必填**，分组标题文案 |
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.HTMLAttributes<HTMLDivElement>` | — | 透传至分组容器 |
+| `children` | `React.ReactNode` | — | 通常放置多个 `MenuItem` |
+
+### MenuItem
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `active` | `boolean` | — | 是否为当前选中项（高亮样式） |
+| `type` | `React.ButtonHTMLAttributes<HTMLButtonElement>['type']` | `"button"` | 按钮 `type` |
+| `className` | `string` | — | 样式类名 |
+| 其他 | `React.ButtonHTMLAttributes<HTMLButtonElement>` | — | 透传至内部 `button`（外层为 `li`） |

@@ -1,0 +1,54 @@
+---
+title: Radio
+description: 单选组：`RadioGroup` 管理当前选中值，`RadioItem` 为单个选项。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <RadioBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { RadioGroup, RadioItem } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <RadioGroup defaultValue="a" onValueChange={(v) => console.log(v)}>
+      <RadioItem value="a" label="选项 A" />
+      <RadioItem value="b" label="选项 B" />
+    </RadioGroup>
+  );
+}
+```
+
+## API
+
+### RadioGroup
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `value` | `string` | `-` | 受控当前选中项的 `value` |
+| `defaultValue` | `string` | `-` | 非受控初始值 |
+| `onValueChange` | `(value: string) => void` | `-` | 选中项变化 |
+| `name` | `string` | 自动生成 | 组内 `input[type=radio]` 的 `name` |
+| `disabled` | `boolean` | `-` | 整组禁用；`RadioItem` 可单独传入 `disabled` 覆盖 |
+| `className` | `string` | `-` | 附加到容器 `div`（`role="radiogroup"`） |
+| 其他 | `Omit<React.ComponentPropsWithoutRef<"div">, "onChange">` | `-` | 继承容器 `div` 属性 |
+
+### RadioItem
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `value` | `string` | （必填） | 该选项提交与组内匹配的值 |
+| `label` | `string` | （必填） | 选项文案 |
+| `disabled` | `boolean` | `-` | 禁用该项；未传时使用组 `disabled` |
+| `id` | `string` | 自动生成 | 关联 `label` 与 `input` |
+| `className` | `string` | `-` | 附加到外层 `label` |
+| 其他 | `Omit<React.ComponentPropsWithoutRef<"input">, "type" \| "size">` | `-` | 须在 `RadioGroup` 内使用 |

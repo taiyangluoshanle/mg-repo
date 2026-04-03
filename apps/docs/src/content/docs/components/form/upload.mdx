@@ -1,0 +1,43 @@
+---
+title: Upload
+description: 文件上传区域，支持点击选择、拖拽放下，以及 `accept`、`multiple` 与文件列表回调。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <UploadBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Upload } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Upload
+      accept="image/*"
+      multiple
+      onFilesChange={(files) => console.log(files)}
+    />
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `accept` | `string` | `-` | 传给隐藏 `input[type=file]` 的 `accept` |
+| `multiple` | `boolean` | `-` | 是否可多选文件 |
+| `onFilesChange` | `(files: File[]) => void` | `-` | 选择或拖入文件后回调；选择同一文件会清空 `input` 以便再次选择 |
+| `label` | `React.ReactNode` | `"Drag files here or click to browse"` | 拖放区内主文案 |
+| `description` | `React.ReactNode` | `-` | 主文案下方的辅助说明 |
+| `inputProps` | `Omit<React.ComponentPropsWithoutRef<"input">, "type" \| "accept" \| "multiple" \| "onChange" \| "className">` | `-` | 透传给隐藏 file input 的额外属性 |
+| `className` | `string` | `-` | 附加到外层包裹 `div` |
+| 其他 | `Omit<React.ComponentPropsWithoutRef<"div">, "onChange" \| "children">` | `-` | 外层 `div` 还处理拖放事件 |

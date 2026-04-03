@@ -1,0 +1,33 @@
+---
+title: Checkbox
+description: 复选框组件，支持自定义标签文本和受控状态。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <CheckboxBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Checkbox } from '@mg/ui';
+
+export default function Demo() {
+  return <Checkbox label="同意协议" />;
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `checked` | `boolean` | `false` | 选中状态 |
+| `onCheckedChange` | `(checked: boolean) => void` | `-` | 状态变更回调 |
+| `label` | `string` | `-` | 标签文本 |
+| `disabled` | `boolean` | `false` | 禁用状态 |

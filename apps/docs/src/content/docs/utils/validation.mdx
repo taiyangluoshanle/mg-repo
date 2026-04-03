@@ -1,0 +1,92 @@
+---
+title: 校验工具
+description: 邮箱、中国大陆手机号、URL、空值与中国大陆 18 位身份证等常用校验。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+### isEmail
+
+基于实用级正则（受 RFC 5322 启发），判断字符串是否像合法邮箱。
+
+```ts
+import { isEmail } from '@mg/utils';
+
+isEmail('user@example.com'); // true
+isEmail('bad'); // false
+```
+
+### isPhone
+
+中国大陆手机号：11 位数字且以 `1` 开头。
+
+```ts
+import { isPhone } from '@mg/utils';
+
+isPhone('13800138000'); // true
+```
+
+### isUrl
+
+是否为语法上合法的绝对 URL（支持 `http`、`https` 等 `URL` 可解析的 scheme）。
+
+```ts
+import { isUrl } from '@mg/utils';
+
+isUrl('https://example.com/path'); // true
+```
+
+### isEmpty
+
+在以下情况返回 `true`：`null`、`undefined`、空白字符串、空数组，或**空纯对象**（无自有键的普通对象）。
+
+```ts
+import { isEmpty } from '@mg/utils';
+
+isEmpty(null);
+isEmpty('');
+isEmpty([]);
+isEmpty({});
+```
+
+### isIdCard
+
+验证 18 位中国大陆居民身份证：校验位与出生日期合法。
+
+```ts
+import { isIdCard } from '@mg/utils';
+
+isIdCard(userInput); // 合法 18 位大陆身份证为 true
+```
+
+### 按需批量导入
+
+```ts
+import { isEmail, isPhone, isUrl, isEmpty, isIdCard } from '@mg/utils';
+```
+
+## API
+
+| 函数 | 签名 | 说明 |
+| --- | --- | --- |
+| `isEmail` | `(value: string) => boolean` | 邮箱形态校验 |
+| `isPhone` | `(value: string) => boolean` | 中国大陆 11 位手机号（`1` 开头） |
+| `isUrl` | `(value: string) => boolean` | 绝对 URL 语法校验 |
+| `isEmpty` | `(value: unknown) => boolean` | 空值、空串、空数组、空纯对象 |
+| `isIdCard` | `(value: string) => boolean` | 18 位身份证校验（含校验码与日期） |
+
+### 参数与返回值
+
+| 函数 | 参数 | 返回值 |
+| --- | --- | --- |
+| `isEmail` | `value` 待测字符串 | 通过为 `true` |
+| `isPhone` | `value` 待测字符串 | 通过为 `true` |
+| `isUrl` | `value` 待测字符串 | 通过为 `true` |
+| `isEmpty` | `value` 任意值 | 视为「空」则为 `true` |
+| `isIdCard` | `value` 待测字符串 | 合法 18 位身份证为 `true` |

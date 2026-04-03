@@ -1,0 +1,4 @@
+{
+  "title": "Order",
+  "pages": ["order-card", "order-status", "order-timeline", "address-card"]
+}

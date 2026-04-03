@@ -1,0 +1,35 @@
+---
+title: CouponTag
+description: 优惠券/促销标签，按类型应用不同配色，展示自定义文案（如折扣描述）。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui-commerce
+```
+
+## 基础用法
+
+```tsx
+import { CouponTag } from '@mg/ui-commerce';
+
+export default function Demo() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <CouponTag type="discount" value="满200享8折" />
+      <CouponTag type="reduction" value="立减¥20" />
+      <CouponTag type="freeShipping" value="包邮" />
+    </div>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `type` | `"discount" \| "reduction" \| "freeShipping"` | — | 券类型，决定边框与背景色系 |
+| `value` | `string` | — | 标签内展示的文案 |
+
+除上表外，组件继承根 `span` 元素的 HTML 属性（如 `className`）。

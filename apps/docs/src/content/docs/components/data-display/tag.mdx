@@ -1,0 +1,46 @@
+---
+title: Tag
+description: 标签/芯片组件，用于关键词、筛选条件等；支持关闭按钮与回调。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <TagBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Tag } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Tag variant="default">默认</Tag>
+      <Tag variant="primary">主要</Tag>
+      <Tag variant="success">成功</Tag>
+      <Tag variant="warning">警告</Tag>
+      <Tag variant="error">错误</Tag>
+      <Tag closable onClose={() => console.log('closed')}>
+        可关闭
+      </Tag>
+    </div>
+  );
+}
+```
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `variant` | `"default" \| "primary" \| "success" \| "warning" \| "error"` | `"default"` | 视觉变体 |
+| `closable` | `boolean` | `false` | 是否显示关闭按钮 |
+| `onClose` | `() => void` | — | 点击关闭时触发 |
+| `className` | `string` | — | 附加类名 |
+| `children` | `ReactNode` | — | 标签文案 |
+| 其他 | `HTMLAttributes<HTMLSpanElement>` | — | 原生 `span` 属性 |

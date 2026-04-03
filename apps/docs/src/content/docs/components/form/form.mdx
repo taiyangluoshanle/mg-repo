@@ -1,0 +1,62 @@
+---
+title: Form
+description: 表单布局原子：`Form` 表单间距、`FormField` 字段块、`FormLabel` 标签、`FormMessage` 错误提示。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <FormBasicDemo />
+</ComponentPreview>
+
+```tsx
+import { Form, FormField, FormLabel, FormMessage, Input } from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <Form>
+      <FormField>
+        <FormLabel htmlFor="name">姓名</FormLabel>
+        <Input id="name" />
+        <FormMessage>错误提示示例</FormMessage>
+      </FormField>
+    </Form>
+  );
+}
+```
+
+## API
+
+### Form
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | `-` | 默认带 `space-y-4` 垂直间距 |
+| 其他 | `React.ComponentPropsWithoutRef<"form">` | `-` | 原生 `<form>` 属性 |
+
+### FormField
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | `-` | 默认 `space-y-1.5` |
+| 其他 | `React.ComponentPropsWithoutRef<"div">` | `-` | 包裹单个字段的标签、控件与提示 |
+
+### FormLabel
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | `-` | 默认小号加粗前景色 |
+| 其他 | `React.ComponentPropsWithoutRef<"label">` | `-` | 原生 `label`，请配合 `htmlFor` 关联控件 |
+
+### FormMessage
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `className` | `string` | `-` | 默认小号破坏色 |
+| 其他 | `React.ComponentPropsWithoutRef<"p">` | `-` | 带 `role="alert"`，用于校验或错误文案 |

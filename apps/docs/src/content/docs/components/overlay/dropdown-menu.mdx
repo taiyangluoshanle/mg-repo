@@ -1,0 +1,54 @@
+---
+title: DropdownMenu
+description: 下拉菜单，点击触发器展开菜单项列表。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/ui
+```
+
+## 基础用法
+
+<ComponentPreview>
+  <DropdownMenuBasicDemo />
+</ComponentPreview>
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@mg/ui';
+
+export default function Demo() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>操作</DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>编辑</DropdownMenuItem>
+        <DropdownMenuItem>删除</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```
+
+## API
+
+### DropdownMenu
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `open` | `boolean` | `-` | 受控开关 |
+| `onOpenChange` | `(open: boolean) => void` | `-` | 状态变更 |
+| `children` | `ReactNode` | `-` | Trigger + Content |
+
+### DropdownMenuItem
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `onSelect` | `() => void` | `-` | 选中回调 |
+| `disabled` | `boolean` | `false` | 禁用 |

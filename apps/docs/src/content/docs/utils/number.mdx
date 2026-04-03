@@ -1,0 +1,126 @@
+---
+title: 数字工具
+description: 数值限制、货币与百分比格式化、随机整数、定点小数与千分位分组等。
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+### clamp
+
+将数值限制在闭区间 `[min, max]` 内；若 `min > max` 会自动交换边界。
+
+```ts
+import { clamp } from '@mg/utils';
+
+clamp(150, 0, 100); // 100
+clamp(-5, 0, 10); // 0
+```
+
+### formatCurrency
+
+使用 `Intl.NumberFormat` 格式化为货币字符串，默认 `zh-CN` + `CNY`（显示为 ¥）。
+
+```ts
+import { formatCurrency } from '@mg/utils';
+
+formatCurrency(1234.5); // 如 "¥1,234.50"（依环境略有差异）
+formatCurrency(99, { currency: 'USD', locale: 'en-US' });
+formatCurrency(10, { decimals: 0 });
+```
+
+### formatPercent
+
+将比例格式化为本地化百分比（如 `0.25` → `25%`）。
+
+```ts
+import { formatPercent } from '@mg/utils';
+
+formatPercent(0.256); // 默认 0 位小数，如 "26%"
+formatPercent(0.256, { decimals: 1 });
+```
+
+### randomInt
+
+返回 `[min, max]` 内的随机整数（含端点）；参数非法时返回 `NaN`。
+
+```ts
+import { randomInt } from '@mg/utils';
+
+randomInt(1, 6); // 1～6
+```
+
+### toFixed
+
+按指定位数格式化为字符串，并缓解常见浮点误差。
+
+```ts
+import { toFixed } from '@mg/utils';
+
+toFixed(1.005, 2);
+```
+
+### formatNumber
+
+按区域设置分组（如千分位）。
+
+```ts
+import { formatNumber } from '@mg/utils';
+
+formatNumber(1234567.89);
+formatNumber(3.14159, { maximumFractionDigits: 2 });
+```
+
+### 按需批量导入
+
+```ts
+import {
+  clamp,
+  formatCurrency,
+  formatPercent,
+  randomInt,
+  toFixed,
+  formatNumber,
+} from '@mg/utils';
+```
+
+## API
+
+| 函数 | 签名 | 说明 |
+| --- | --- | --- |
+| `clamp` | `(value: number, min: number, max: number) => number` | 限制在区间内 |
+| `formatCurrency` | `(amount: number, options?: FormatCurrencyOptions) => string` | 货币格式化 |
+| `formatPercent` | `(value: number, options?: FormatPercentOptions) => string` | 百分比格式化 |
+| `randomInt` | `(min: number, max: number) => number` | 随机整数，非法输入为 `NaN` |
+| `toFixed` | `(value: number, digits: number) => string` | 定点字符串 |
+| `formatNumber` | `(value: number, options?: FormatNumberOptions) => string` | 数字分组格式化 |
+
+### FormatCurrencyOptions
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| `locale` | `string` | BCP 47 区域，默认 `zh-CN` |
+| `currency` | `string` | ISO 4217 货币代码，默认 `CNY` |
+| `decimals` | `number` | 小数位数；省略时遵循区域与货币默认 |
+
+### FormatPercentOptions
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| `locale` | `string` | BCP 47 区域，默认 `zh-CN` |
+| `decimals` | `number` | 小数位数，默认 `0`，最大 `20` |
+
+### FormatNumberOptions
+
+| 属性 | 类型 | 说明 |
+| --- | --- | --- |
+| `locale` | `string` | BCP 47 区域，默认 `zh-CN` |
+| `minimumFractionDigits` | `number` | 传给 `Intl` 的最小小数位 |
+| `maximumFractionDigits` | `number` | 传给 `Intl` 的最大小数位 |
+
+类型可从包中导入：`import type { FormatCurrencyOptions, FormatPercentOptions, FormatNumberOptions } from '@mg/utils'`。

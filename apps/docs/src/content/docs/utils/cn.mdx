@@ -1,0 +1,30 @@
+---
+title: cn
+description: 合并 Tailwind CSS 类名并处理冲突
+---
+
+## 安装
+
+```bash
+pnpm add @mg/utils
+```
+
+## 使用
+
+```tsx
+import { cn } from '@mg/utils';
+
+const className = cn(
+  'p-4 bg-brand text-white',
+  isActive && 'bg-brand-hover',
+  className
+);
+```
+
+## API
+
+```typescript
+cn(...inputs: ClassValue[]): string
+```
+
+基于 `clsx` + `tailwind-merge`，合并多个类名并智能处理 Tailwind 类名冲突。

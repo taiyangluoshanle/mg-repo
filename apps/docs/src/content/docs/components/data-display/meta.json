@@ -1,0 +1,14 @@
+{
+  "title": "Data Display",
+  "pages": [
+    "badge",
+    "avatar",
+    "tag",
+    "card",
+    "table",
+    "list",
+    "accordion",
+    "empty",
+    "skeleton"
+  ]
+}
