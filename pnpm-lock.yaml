@@ -29,6 +29,9 @@ importers:
       '@mg/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@mg/ui-commerce':
+        specifier: workspace:*
+        version: link:../../packages/ui-commerce
       '@mg/utils':
         specifier: workspace:*
         version: link:../../packages/utils
