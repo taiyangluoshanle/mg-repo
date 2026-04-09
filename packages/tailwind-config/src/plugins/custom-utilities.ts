@@ -1,6 +1,7 @@
 import plugin from "tailwindcss/plugin";
 
-export const customUtilities = plugin(({ addUtilities }) => {
+/** @type {import('tailwindcss/types/config').PluginCreator} */
+export const customUtilities: any = plugin(({ addUtilities }) => {
   addUtilities({
     ".text-balance": {
       "text-wrap": "balance",

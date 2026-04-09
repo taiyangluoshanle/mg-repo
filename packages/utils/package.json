@@ -13,9 +13,13 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    }
+    },
+    "./business-overrides.css": "./src/business-overrides.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "src/business-overrides.css"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

@@ -1,0 +1,264 @@
+/* 隐藏表单 */
+[aria-label='Open Form'] {
+  left: -9999px !important;
+}
+
+/* Lexical 编辑器样式 */
+.lexicaltheme__table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  table-layout: fixed;
+  width: fit-content;
+  margin: 8px 0px;
+}
+
+.lexicaltheme__tableRowStriping tr:nth-of-type(even) {
+  background-color: #f2f5fb;
+}
+
+.lexicaltheme__tableSelection *::selection {
+  background-color: transparent;
+}
+
+.lexicaltheme__tableSelected {
+  outline: 2px solid rgb(60, 132, 244);
+}
+
+.lexicaltheme__tableCell {
+  border: 1px solid #bbb !important;
+  width: 75px;
+  vertical-align: top;
+  text-align: start;
+  padding: 6px 8px;
+  position: relative;
+  outline: none;
+}
+
+.lexicaltheme__tableCellSortedIndicator {
+  display: block;
+  opacity: 0.5;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #999;
+}
+
+.lexicaltheme__tableCellHeader {
+  background-color: #f2f3f5;
+  text-align: start;
+  font-weight: unset;
+}
+
+/* 取消 Tailwind 默认样式 */
+.unset-tw select:not([size]) {
+  background-image: none;
+}
+
+/*
+* --------------------------------------------------
+*  Zoho SalesIQ - 与线上保持一致
+* --------------------------------------------------
+*/
+.zsiq_float {
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.08);
+}
+.zsiq_theme1.zsiq_floatmain {
+  width: 40px !important;
+  height: 40px !important;
+  z-index: 9 !important;
+  left: unset !important;
+  right: 16px !important;
+  bottom: 128px !important;
+}
+.zsiq_theme1 .siqicon:before {
+  line-height: 36px !important;
+  font-size: 16px !important;
+}
+.zsiq_theme1 .zsiq_flt_rel {
+  float: none !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.btn-loading {
+  opacity: 0.5;
+}
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  animation: btn-loading 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes btn-loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .zsiq-newtheme.siq_lft {
+    right: 14px !important;
+    left: auto !important;
+  }
+}
+@media (min-width: 560px) and (max-width: 1023px) {
+  .zsiq-newtheme.siq_lft {
+    right: 8px !important;
+    left: auto !important;
+  }
+}
+@media (min-width: 1024px) {
+  .zsiq_theme1 .zsiq_flt_rel {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .zsiq_theme1.zsiq_floatmain {
+    width: 50px !important;
+    height: 50px !important;
+    z-index: 9 !important;
+    left: unset !important;
+    right: 24px !important;
+    bottom: 170px !important;
+  }
+  .zsiq_theme1 .siqicon:before {
+    line-height: 50px !important;
+    font-size: 20px !important;
+  }
+}
+
+/* cookie 弹窗 */
+.shopify-pc__banner__dialog {
+  @apply !bg-neutral-50 !px-4 !py-6 lg:!px-10 lg:!py-6;
+}
+
+.shopify-pc__prefs__overlay {
+  @apply !backdrop-blur-sm;
+}
+
+.shopify-pc__banner__dialog p,
+.shopify-pc__prefs__intro-main p,
+.shopify-pc__prefs__option p {
+  @apply !text-xs !text-neutral-600 lg:!text-sm;
+}
+
+.shopify-pc__banner__body {
+  @apply !mb-4 lg:!mb-0;
+}
+
+.shopify-pc__banner__body-title {
+  @apply !mb-1 !text-base !font-bold lg:!mb-2 lg:!text-lg;
+}
+
+.shopify-pc__banner__btns {
+  @apply !flex-row !flex-wrap !justify-start lg:!justify-end;
+}
+
+.shopify-pc__banner__dialog button {
+  @apply !m-0 !flex !h-9 !items-center !justify-center !text-sm lg:!h-11 lg:!text-base;
+}
+
+.shopify-pc__banner__dialog button.shopify-pc__banner__btn-manage-prefs {
+  @apply !w-full !text-sm !text-neutral-900 max-sm:!flex-auto sm:!w-auto sm:!basis-auto lg:!text-base;
+}
+
+.shopify-pc__banner__dialog button.shopify-pc__banner__btn-accept {
+  @apply !rounded-full !border-blue-600 !bg-blue-600 !text-white !transition-colors hover:!border-blue-700 hover:!bg-blue-700 sm:!basis-auto !flex-1 xl:!flex-none xl:!w-[180px];
+}
+
+.shopify-pc__banner__dialog button.shopify-pc__banner__btn-decline {
+  @apply !rounded-full !border-neutral-200 !bg-neutral-200 !text-neutral-900 !transition-colors hover:!border-neutral-300 hover:!bg-neutral-300 sm:!basis-auto !flex-1 xl:!flex-none xl:!w-[180px];
+}
+
+/* 弹出cookie 管理样式 */
+.shopify-pc__prefs__dialog {
+  @apply !bg-neutral-50;
+}
+
+.shopify-pc__prefs__header-actions button {
+  @apply !rounded-full !transition-colors hover:!border-neutral-300 hover:!bg-neutral-300;
+}
+
+.shopify-pc__prefs__option label {
+  @apply !text-lg;
+}
+
+/* 其他第三方插件修复 */
+.affirm-modal-trigger {
+  color: #0078d1 !important;
+}
+
+.tippy-box {
+  border-radius: 12px !important;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+  height: 100%;
+}
+
+.react-datepicker__header {
+  background: white !important;
+}
+
+.react-datepicker__triangle {
+  fill: white !important;
+  color: white !important;
+}
+
+.PhotoView-Slider__Backdrop {
+  background: white !important;
+}
+
+.PhotoView-Portal {
+  pointer-events: auto;
+}
+
+#globalLoading {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 3px;
+  background:
+    radial-gradient(farthest-side, #0071e3 95%, #0000) 50% 0/12px 12px no-repeat,
+    radial-gradient(farthest-side, #0000 calc(100% - 5px), #0071e3 calc(100% - 4px)) content-box;
+  animation: l6 2s infinite;
+}
+
+@keyframes l6 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.PopoverContent {
+  width: var(--radix-popover-trigger-width);
+}
+
+#klarna-payments-container *::part(osm-container) {
+  border: none;
+  padding-left: 0;
+}
+
+#productModel::part(default-progress-bar) {
+  background-color: transparent !important;
+}

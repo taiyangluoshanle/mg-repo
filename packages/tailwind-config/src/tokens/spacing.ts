@@ -25,4 +25,16 @@ export const spacing = {
   32: "8rem",
   36: "9rem",
   40: "10rem",
+  nav: "var(--height-nav)",
+  screen: "var(--screen-height, 100vh)",
+};
+
+export const height = {
+  screen: "var(--screen-height, 100vh)",
+  "screen-no-nav": "calc(var(--screen-height, 100vh) - var(--height-nav))",
+  "screen-dynamic": "var(--screen-height-dynamic, 100vh)",
+};
+
+export const maxWidth = {
+  content: "90rem",
 };

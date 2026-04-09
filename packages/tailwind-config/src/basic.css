@@ -1,0 +1,1340 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+@plugin "flowbite/plugin";
+
+@source "../**/*.{js,ts,jsx,tsx}";
+@source '../../../../packages/components/src/**/*.{js,ts,jsx,tsx}';
+@source "../../../../node_modules/flowbite/dist/flowbite.js";
+@source "../../../../node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}";
+@source "../../../../node_modules/react-tailwindcss-datepicker/dist/index.esm.js";
+@source "../../../../node_modules/@bluetti/**/*.{js,jsx,tsx}";
+
+@theme {
+  /* ==================== 自定义断点 ==================== */
+  --breakpoint-sm: 32em;
+  --breakpoint-sm-plus: 40em;
+  --breakpoint-btsize: 46.875em;
+  --breakpoint-mb: 48em;
+  --breakpoint-md: 52em;
+  --breakpoint-lg: 64em;
+  --breakpoint-xl: 80em;
+  --breakpoint-1\.5xl: 90em;
+  --breakpoint-2xl: 96em;
+  --breakpoint-3xl: 120em;
+  --breakpoint-4xl: 160em;
+
+  /* ==================== 自定义z-index ==================== */
+  --z-index-menu: 100;
+  --z-index-sticky: 200;
+  --z-index-header: 300;
+  --z-index-overlay: 400;
+  --z-index-modal: 500;
+  --z-index-toast: 600;
+  --z-index-tooltip: 700;
+
+  /* ==================== 自定义aspect-ratio ==================== */
+  --aspect-1\/2: 1/2;
+  --aspect-2\/1: 2/1;
+  --aspect-2\/3: 2/3;
+  --aspect-3\/2: 3/2;
+  --aspect-3\/4: 3/4;
+  --aspect-4\/3: 4/3;
+  --aspect-9\/16: 9/16;
+  --aspect-16\/9: 16/9;
+
+  /* 额外的细分断点 */
+  --breakpoint-2xl-a: 50em;
+  --breakpoint-2xl-b: 56.25em;
+  --breakpoint-2xl-c: 62.5em;
+  --breakpoint-2xl-d: 68.75em;
+  --breakpoint-2xl-e: 75em;
+  --breakpoint-2xl-f: 81.25em;
+
+  --breakpoint-3xl-a: 87.5em;
+  --breakpoint-3xl-b: 93.75em;
+  --breakpoint-3xl-c: 100em;
+  --breakpoint-3xl-d: 106.25em;
+  --breakpoint-3xl-e: 112.5em;
+  --breakpoint-3xl-f: 118.75em;
+
+  --breakpoint-4xl-a: 125em;
+  --breakpoint-4xl-b: 131.25em;
+  --breakpoint-4xl-c: 137.5em;
+  --breakpoint-4xl-d: 143.75em;
+  --breakpoint-4xl-e: 150em;
+  --breakpoint-4xl-f: 156.25em;
+
+  /* ==================== 字体大小 ==================== */
+  --text-2xs: 0.625rem; /* 10px */
+  --text-2xs--line-height: 1.5; /* 15px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-xs--line-height: 1.5; /* 18px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-sm--line-height: 1.25rem; /* 20px */
+  --text-base: 1rem; /* 16px */
+  --text-base--line-height: 1.5rem; /* 24px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-lg--line-height: 1.625rem; /* 26px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-xl--line-height: 1.75rem; /* 28px */
+  --text-2xl: 1.375rem; /* 22px */
+  --text-2xl--line-height: 1.625rem; /* 26px */
+  --text-3xl: 1.5rem; /* 24px */
+  --text-3xl--line-height: 1.875rem; /* 30px */
+  --text-4xl: 1.75rem; /* 28px */
+  --text-4xl--line-height: 2.125rem; /* 34px */
+  --text-5xl: 2rem; /* 32px */
+  --text-5xl--line-height: 2.5rem; /* 40px */
+  --text-6xl: 2.5rem; /* 40px */
+  --text-6xl--line-height: 3rem; /* 48px */
+  --text-7xl: 3rem; /* 48px */
+  --text-7xl--line-height: 3.5rem; /* 56px */
+  --text-8xl: 3.75rem; /* 60px */
+  --text-8xl--line-height: 4.25rem; /* 68px */
+  --text-9xl: 4.5rem; /* 72px */
+  --text-9xl--line-height: 5rem; /* 80px */
+
+  /* ==================== 字体家族 ==================== */
+  --font-family-sans: Bluetti, ui-sans-serif, system-ui, sans-serif;
+  --font-family-serif: Bluetti, Palatino, ui-serif;
+  --font-family-bluetti: Bluetti;
+  --font-family-bluetti2: Bluetti2;
+  --font-family-poppins: Poppins;
+
+  /* ==================== 项目主题颜色 ==================== */
+  --color-primary: #0071e3;
+  --color-warnning: #e30000;
+  --color-positive: #32d74b;
+  --color-logo: #00a2e4;
+
+  /* ==================== 颜色系统 - Red ==================== */
+  --color-red: #ff3b30;
+  --color-red-dark: #ff453a;
+  --color-red-hover: #f53f3f;
+  --color-red-active: #d42834;
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+
+  /* ==================== 颜色系统 - Orange ==================== */
+  --color-orange: #ff9500;
+  --color-orange-dark: #ff9f0a;
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-300: #fdba74;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+
+  /* ==================== 颜色系统 - Yellow ==================== */
+  --color-yellow: #ffcc00;
+  --color-yellow-dark: #ffd60a;
+  --color-yellow-50: #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-700: #a16207;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
+
+  /* ==================== 颜色系统 - Green ==================== */
+  --color-green: #32d74b;
+  --color-green-dark: #34c759;
+  --color-green-hover: #34c759;
+  --color-green-active: #18b23f;
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+
+  /* ==================== 颜色系统 - Teal ==================== */
+  --color-teal: #5ac8fa;
+  --color-teal-dark: #64d2ff;
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+
+  /* ==================== 颜色系统 - Indigo ==================== */
+  --color-indigo: #5856d6;
+  --color-indigo-dark: #5e5ce6;
+  --color-indigo-50: #eef2ff;
+  --color-indigo-100: #e0e7ff;
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  --color-indigo-800: #3730a3;
+  --color-indigo-900: #312e81;
+
+  /* ==================== 颜色系统 - Purple ==================== */
+  --color-purple: #af52de;
+  --color-purple-dark: #bf5af2;
+  --color-purple-50: #faf5ff;
+  --color-purple-100: #f3e8ff;
+  --color-purple-200: #e9d5ff;
+  --color-purple-300: #d8b4fe;
+  --color-purple-400: #c084fc;
+  --color-purple-500: #a855f7;
+  --color-purple-600: #9333ea;
+  --color-purple-700: #7e22ce;
+  --color-purple-800: #6b21a8;
+  --color-purple-900: #581c87;
+
+  /* ==================== 颜色系统 - Pink ==================== */
+  --color-pink: #ff2d55;
+  --color-pink-dark: #ff2d55;
+  --color-pink-50: #fdf2f8;
+  --color-pink-100: #fce7f3;
+  --color-pink-200: #fbcfe8;
+  --color-pink-300: #f9a8d4;
+  --color-pink-400: #f472b6;
+  --color-pink-500: #ec4899;
+  --color-pink-600: #db2777;
+  --color-pink-700: #be185d;
+  --color-pink-800: #9d174d;
+  --color-pink-900: #831843;
+
+  /* ==================== 颜色系统 - Blue (主色蓝) ==================== */
+  --color-blue: #0071e3;
+  --color-blue-hover: #0077ed;
+  --color-blue-active: #006edb;
+  --color-blue-dark: #2997ff;
+  --color-blue-50: #e8f0fe;
+  --color-blue-100: #e1effe;
+  --color-blue-200: #c3ddfd;
+  --color-blue-300: #a4cafe;
+  --color-blue-400: #2997ff;
+  --color-blue-500: #0077ed;
+  --color-blue-600: #0071e3;
+  --color-blue-700: #0066cc;
+  --color-blue-800: #1959b3;
+  --color-blue-900: #233876;
+
+  /* ==================== 颜色系统 - Gray ==================== */
+  --color-gray: #1d1d1f;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #fafafa;
+  --color-gray-200: #f5f5f7;
+  --color-gray-300: #f2f2f2;
+  --color-gray-400: #d2d2d7;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #86868b;
+  --color-gray-700: #6e6e73;
+  --color-gray-800: #333336;
+  --color-gray-900: #1d1d1f;
+  --color-gray-950: #030712;
+
+  /* ==================== 颜色系统 - GrayDark (深色背景) ==================== */
+  --color-gray-dark: #ececec;
+  --color-gray-dark-50: #f5f5f7;
+  --color-gray-dark-100: #e8e8ed;
+  --color-gray-dark-200: #d2d2d7;
+  --color-gray-dark-300: #a1a1a6;
+  --color-gray-dark-400: #86868b;
+  --color-gray-dark-500: #6e6e73;
+  --color-gray-dark-600: #424245;
+  --color-gray-dark-700: #1d1d1f;
+  --color-gray-dark-800: #161617;
+  --color-gray-dark-900: #090a0e;
+
+  /* ==================== 颜色系统 - Neutral (新中性色) ==================== */
+  --color-neutral-50: #fafafc;
+  --color-neutral-100: #f5f5f7;
+  --color-neutral-200: #e9e9ed;
+  --color-neutral-300: #d2d2d7;
+  --color-neutral-400: #9a9a9e;
+  --color-neutral-500: #86868b;
+  --color-neutral-600: #6e6e73;
+  --color-neutral-700: #424245;
+  --color-neutral-800: #333336;
+  --color-neutral-900: #1d1d1f;
+  --color-neutral-950: #161617;
+
+  /* ==================== 颜色系统 - Zinc ==================== */
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+
+  /* ==================== 颜色系统 - Slate ==================== */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* ==================== 颜色系统 - Amber ==================== */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #78350f;
+
+  /* ==================== 颜色系统 - Emerald ==================== */
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+
+  /* ==================== 颜色系统 - Cyan ==================== */
+  --color-cyan-50: #ecfeff;
+  --color-cyan-100: #cffafe;
+  --color-cyan-200: #a5f3fc;
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-cyan-700: #0e7490;
+  --color-cyan-800: #155e75;
+  --color-cyan-900: #164e63;
+
+  /* ==================== 颜色系统 - Sky ==================== */
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #e0f2fe;
+  --color-sky-200: #bae6fd;
+  --color-sky-300: #7dd3fc;
+  --color-sky-400: #38bdf8;
+  --color-sky-500: #0ea5e9;
+  --color-sky-600: #0284c7;
+  --color-sky-700: #0369a1;
+  --color-sky-800: #075985;
+  --color-sky-900: #0c4a6e;
+
+  /* ==================== 颜色系统 - Violet ==================== */
+  --color-violet-50: #f5f3ff;
+  --color-violet-100: #ede9fe;
+  --color-violet-200: #ddd6fe;
+  --color-violet-300: #c4b5fd;
+  --color-violet-400: #a78bfa;
+  --color-violet-500: #8b5cf6;
+  --color-violet-600: #7c3aed;
+  --color-violet-700: #6d28d9;
+  --color-violet-800: #5b21b6;
+  --color-violet-900: #4c1d95;
+
+  /* ==================== 颜色系统 - Fuchsia ==================== */
+  --color-fuchsia-50: #fdf4ff;
+  --color-fuchsia-100: #fae8ff;
+  --color-fuchsia-200: #f5d0fe;
+  --color-fuchsia-300: #f0abfc;
+  --color-fuchsia-400: #e879f9;
+  --color-fuchsia-500: #d946ef;
+  --color-fuchsia-600: #c026d3;
+  --color-fuchsia-700: #a21caf;
+  --color-fuchsia-800: #86198f;
+  --color-fuchsia-900: #701a75;
+
+  /* ==================== 颜色系统 - Rose ==================== */
+  --color-rose-50: #fff1f2;
+  --color-rose-100: #ffe4e6;
+  --color-rose-200: #fecdd3;
+  --color-rose-300: #fda4af;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-rose-700: #be123c;
+  --color-rose-800: #9f1239;
+  --color-rose-900: #881337;
+
+  /* ==================== Shadcn UI 系统颜色 ==================== */
+  --color-background: #ffffff;
+  --color-foreground: #09090b;
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #09090b;
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #18181b;
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+  --color-accent: #f4f4f5;
+  --color-accent-foreground: #18181b;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+  --color-card: #ffffff;
+  --color-card-foreground: #09090b;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #09090b;
+
+  /* ==================== Radix UI Colors ==================== */
+  /* @radix-ui/colors - blackA */
+  --color-black-a1: rgba(0, 0, 0, 0.05);
+  --color-black-a2: rgba(0, 0, 0, 0.1);
+  --color-black-a3: rgba(0, 0, 0, 0.15);
+  --color-black-a4: rgba(0, 0, 0, 0.2);
+  --color-black-a5: rgba(0, 0, 0, 0.3);
+  --color-black-a6: rgba(0, 0, 0, 0.4);
+  --color-black-a7: rgba(0, 0, 0, 0.5);
+  --color-black-a8: rgba(0, 0, 0, 0.6);
+  --color-black-a9: rgba(0, 0, 0, 0.7);
+  --color-black-a10: rgba(0, 0, 0, 0.8);
+  --color-black-a11: rgba(0, 0, 0, 0.9);
+  --color-black-a12: rgba(0, 0, 0, 0.95);
+
+  /* @radix-ui/colors - mauve */
+  --color-mauve1: #fdfcfd;
+  --color-mauve2: #faf9fb;
+  --color-mauve3: #f2eff3;
+  --color-mauve4: #eae7ec;
+  --color-mauve5: #e3dfe6;
+  --color-mauve6: #dbd8e0;
+  --color-mauve7: #d0cdd7;
+  --color-mauve8: #bcbac7;
+  --color-mauve9: #8e8c99;
+  --color-mauve10: #84828e;
+  --color-mauve11: #65636d;
+  --color-mauve12: #211f26;
+
+  /* @radix-ui/colors - violet */
+  --color-violet1: #fdfcfe;
+  --color-violet2: #faf8ff;
+  --color-violet3: #f4f0fe;
+  --color-violet4: #ebe4ff;
+  --color-violet5: #e1d9ff;
+  --color-violet6: #d4cafe;
+  --color-violet7: #c2b5f5;
+  --color-violet8: #aa99ec;
+  --color-violet9: #6e56cf;
+  --color-violet10: #654dc4;
+  --color-violet11: #6550b9;
+  --color-violet12: #2f265f;
+
+  /* @radix-ui/colors - slate */
+  --color-slate1: #fcfcfd;
+  --color-slate2: #f9f9fb;
+  --color-slate3: #f0f0f3;
+  --color-slate4: #e8e8ec;
+  --color-slate5: #e0e1e6;
+  --color-slate6: #d9d9e0;
+  --color-slate7: #cdced6;
+  --color-slate8: #b9bbc6;
+  --color-slate9: #8b8d98;
+  --color-slate10: #80838d;
+  --color-slate11: #60646c;
+  --color-slate12: #1c2024;
+
+  /* ==================== 特殊颜色 ==================== */
+  --color-marker-unset: unset;
+
+  /* ==================== 间距 ==================== */
+  --spacing: 0.25rem;
+  --spacing-nav: var(--height-nav);
+  --spacing-screen: var(--screen-height, 100vh);
+
+  /* ==================== 高度 ==================== */
+  --height-screen: var(--screen-height, 100vh);
+  --height-screen-no-nav: calc(var(--screen-height, 100vh) - var(--height-nav));
+  --height-screen-dynamic: var(--screen-height-dynamic, 100vh);
+
+  /* ==================== 最大宽度 ==================== */
+  --max-width-content: 90rem;
+
+  /* ==================== 圆角 ==================== */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* ==================== 动画时长和缓动 ==================== */
+  --animate-spin: spin 1s ease-in-out infinite;
+  --animate-spin-slow: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  /* ==================== 关键帧动画 ==================== */
+  @keyframes enter-from-right {
+    from {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes enter-from-left {
+    from {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes exit-to-right {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(200px);
+    }
+  }
+
+  @keyframes exit-to-left {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: rotateX(-10deg) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: rotateX(0deg) scale(1);
+    }
+  }
+
+  @keyframes scale-out {
+    from {
+      opacity: 1;
+      transform: rotateX(0deg) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: rotateX(-10deg) scale(0.95);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-up-and-fade {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-right-and-fade {
+    from {
+      opacity: 0;
+      transform: translateX(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-down-and-fade {
+    from {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-left-and-fade {
+    from {
+      opacity: 0;
+      transform: translateX(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes hide {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(calc(100% + var(--viewport-padding)));
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes swipe-out {
+    from {
+      transform: translateX(var(--radix-toast-swipe-end-x));
+    }
+    to {
+      transform: translateX(calc(100% + var(--viewport-padding)));
+    }
+  }
+
+  /* ==================== 动画类 ==================== */
+  --animate-accordion-down: accordion-down 0.3s ease-out;
+  --animate-accordion-up: accordion-up 0.3s ease-out;
+  --animate-scale-in: scale-in 200ms ease;
+  --animate-scale-out: scale-out 200ms ease;
+  --animate-fade-in: fade-in 200ms ease;
+  --animate-fade-out: fade-out 200ms ease;
+  --animate-enter-from-left: enter-from-left 250ms ease;
+  --animate-enter-from-right: enter-from-right 250ms ease;
+  --animate-exit-to-left: exit-to-left 250ms ease;
+  --animate-exit-to-right: exit-to-right 250ms ease;
+  --animate-slide-up-and-fade: slide-up-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-right-and-fade: slide-right-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down-and-fade: slide-down-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-left-and-fade: slide-left-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down: slide-down 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  --animate-slide-up: slide-up 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  --animate-hide: hide 100ms ease-in;
+  --animate-slide-in: slide-in 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-swipe-out: swipe-out 100ms ease-out;
+
+  /* Prose Configuration */
+  --tw-prose-bullets: unset;
+  --tw-prose-bold: unset;
+}
+
+/* Custom Variants */
+@variant sm-only (@media (min-width: 32em) and (max-width: 48em));
+@variant md-only (@media (min-width: 48em) and (max-width: 64em));
+@variant lg-only (@media (min-width: 64em) and (max-width: 80em));
+@variant xl-only (@media (min-width: 80em) and (max-width: 96em));
+@variant 2xl-only (@media (min-width: 96em));
+
+@variant sm-max (@media (max-width: 48em));
+@variant btsize-max (@media (max-width: 46.875em));
+@variant lg-max (@media (max-width: 64em));
+
+/* Compatibility Utilities */
+@utility bg-grayDark {
+  background-color: var(--color-gray-dark);
+}
+@utility bg-grayDark-200 {
+  background-color: var(--color-gray-dark-200);
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .aspect-53 {
+    aspect-ratio: 5 / 3;
+  }
+
+  .aspect-unset {
+    aspect-ratio: unset;
+  }
+
+  .divider-extralight {
+    border: 0.5px solid #f2f2f2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+    background-color: #f5f5f5;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
+  }
+
+  .sliderItem [data-cards-scroller-item] {
+    --col-gap: 0px;
+    --visible-cols: 1;
+    --col-hit: 0.154168;
+    --padding-left: 24px;
+    --total-gap: 8px;
+    --full-width: calc(100vw);
+    --col-size: calc((100vw - 8px - 24px) / (1 + 0.154168));
+    --last-col-size: calc(calc((100vw - 8px - 24px) / (1 + 0.154168)) + 24px);
+    scroll-snap-align: start;
+    margin: 0 calc(var(--col-gap) / 2);
+    flex: 0 0 var(--col-size);
+  }
+
+  .bluetti-btn {
+    outline: none;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    user-select: none;
+    touch-action: manipulation;
+    box-sizing: border-box;
+    border-radius: 8px;
+  }
+
+  #klarna-payments-container *::part(osm-container) {
+    border: none;
+    padding-left: 0;
+  }
+
+  #productModel::part(default-progress-bar) {
+    background-color: transparent !important;
+  }
+
+  /* Perspective utility */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
+
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+
+  /* padding */
+  @media (max-width: 768px) {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1200px;
+    /* padding-inline: 3rem; */
+  }
+}
+
+/* Hydrogen/Shopify Tokens */
+:root {
+  --color-contrast: 250 250 249;
+  --color-accent: 191 72 0;
+  --font-size-fine: 0.75rem;
+  --font-size-copy: 1rem;
+  --font-size-lead: 1.125rem;
+  --font-size-heading: 2rem;
+  --font-size-display: 3rem;
+  --color-shop-pay: #5a31f4;
+  --shop-pay-button--width: 100%;
+  --height-nav: 3rem;
+  --screen-height: 100vh;
+  --screen-height-dynamic: 100vh;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  @media (min-width: 32em) {
+    --height-nav: 4rem;
+  }
+
+  @media (min-width: 48em) {
+    --height-nav: 6rem;
+    --font-size-heading: 2.25rem;
+    --font-size-display: 3.75rem;
+
+    .sliderItem [data-cards-scroller-item] {
+      --col-gap: 16px;
+      --visible-cols: 2;
+      --padding-left: 32px;
+      --col-hint: 0.5;
+      --col-size: calc(
+        (var(--full-width) - (var(--visible-cols) - 1) * var(--col-gap) - var(--padding-left) * 2) / var(--visible-cols)
+      );
+      --last-col-size: calc(var(--col-size) + var(--padding-left));
+      --total-gap: calc(var(--col-gap) * var(--visible-cols));
+    }
+  }
+
+  @media (min-width: 75em) {
+    .sliderItem [data-cards-scroller-item] {
+      --col-gap: 16px;
+      --visible-cols: 2;
+      --padding-left: 32px;
+      --col-size: calc(
+        (var(--full-width) - (var(--visible-cols) - 1) * var(--col-gap) - var(--padding-left) * 2) / var(--visible-cols)
+      );
+      --last-col-size: calc(var(--col-size) + var(--padding-left));
+      --total-gap: calc(var(--col-gap) * var(--visible-cols));
+    }
+  }
+
+  @media (min-width: 94em) {
+    .sliderItem [data-cards-scroller-item] {
+      --padding-left: calc((var(--full-width) - 1440px) / 2);
+      --col-size: calc((1292px - (var(--visible-cols) - 1) * var(--col-gap)) / var(--visible-cols));
+      --last-col-size: calc(var(--col-size) + var(--padding-left));
+      --total-gap: calc(var(--col-gap) * var(--visible-cols));
+    }
+  }
+
+  @media (min-width: 120em) {
+    .sliderItem [data-cards-scroller-item] {
+      --full-width: calc(100vw - var(--scrollbar-width, 0%));
+      --padding-left: calc((var(--full-width) - 1440px) / 2);
+      --visible-cols: 3;
+      --col-gap: 16px;
+      --col-size: calc((1484px - (var(--visible-cols) - 1) * var(--col-gap)) / var(--visible-cols));
+      --last-col-size: calc(var(--col-size) + var(--padding-left));
+      --total-gap: calc(var(--col-gap) * var(--visible-cols));
+    }
+  }
+
+  @supports (height: 100svh) {
+    --screen-height: 100svh;
+  }
+
+  @supports (height: 100dvh) {
+    --screen-height-dynamic: 100dvh;
+  }
+}
+
+/* 全局样式 */
+[type='text']:focus {
+  box-shadow: none;
+}
+
+.moveScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.affirm-modal-trigger {
+  color: #0078d1 !important;
+}
+
+.tippy-box {
+  border-radius: 12px !important;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+  height: 100%;
+}
+
+.react-datepicker__header {
+  background: white !important;
+}
+
+.react-datepicker__triangle {
+  fill: white !important;
+  color: white !important;
+}
+
+.PhotoView-Slider__Backdrop {
+  background: white !important;
+}
+
+.PhotoView-Portal {
+  pointer-events: auto;
+}
+
+#globalLoading {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 3px;
+  background:
+    radial-gradient(farthest-side, #0071e3 95%, #0000) 50% 0/12px 12px no-repeat,
+    radial-gradient(farthest-side, #0000 calc(100% - 5px), #0071e3 calc(100% - 4px)) content-box;
+  animation: l6 2s infinite;
+}
+
+.PopoverContent {
+  width: var(--radix-popover-trigger-width);
+}
+
+@keyframes l6 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* Shadcn 基础样式 */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    /* 项目中性色 */
+    --n-color-5: #fafafc;
+    --n-color-10: #f5f5f7;
+    --n-color-20: #e9e9ed;
+    --n-color-30: #d2d2d7;
+    --n-color-40: #9a9a9e;
+    --n-color-50: #86868b;
+    --n-color-60: #6e6e73;
+    --n-color-70: #424245;
+    --n-color-80: #333336;
+    --n-color-90: #1d1d1f;
+    --n-color-95: #161617;
+
+    /* 项目主色 */
+    --p-color-10: #e6f1fd;
+    --p-color-20: #b3d5f7;
+    --p-color-30: #2997ff;
+    --p-color-40: #0071e3;
+    --p-color-50: #0066cc;
+    --p-color-60: #005ab6;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* 隐藏表单 */
+[aria-label='Open Form'] {
+  left: -9999px !important;
+}
+
+/* Lexical 编辑器样式 */
+.lexicaltheme__table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  table-layout: fixed;
+  width: fit-content;
+  margin: 8px 0px;
+}
+
+.lexicaltheme__tableRowStriping tr:nth-of-type(even) {
+  background-color: #f2f5fb;
+}
+
+.lexicaltheme__tableSelection *::selection {
+  background-color: transparent;
+}
+
+.lexicaltheme__tableSelected {
+  outline: 2px solid rgb(60, 132, 244);
+}
+
+.lexicaltheme__tableCell {
+  border: 1px solid #bbb !important;
+  width: 75px;
+  vertical-align: top;
+  text-align: start;
+  padding: 6px 8px;
+  position: relative;
+  outline: none;
+}
+
+.lexicaltheme__tableCellSortedIndicator {
+  display: block;
+  opacity: 0.5;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #999;
+}
+
+.lexicaltheme__tableCellHeader {
+  background-color: #f2f3f5;
+  text-align: start;
+  font-weight: unset;
+}
+
+/* 取消 Tailwind 默认样式 */
+.unset-tw select:not([size]) {
+  background-image: none;
+}
+
+/*
+* --------------------------------------------------
+*  Zoho SalesIQ - 与线上保持一致
+* --------------------------------------------------
+*/
+.zsiq_float {
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.08);
+}
+.zsiq_theme1.zsiq_floatmain {
+  width: 40px !important;
+  height: 40px !important;
+  z-index: 9 !important;
+  left: unset !important;
+  right: 16px !important;
+  bottom: 128px !important;
+}
+.zsiq_theme1 .siqicon:before {
+  line-height: 36px !important;
+  font-size: 16px !important;
+}
+.zsiq_theme1 .zsiq_flt_rel {
+  float: none !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.btn-loading {
+  opacity: 0.5;
+}
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  animation: btn-loading 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes btn-loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .zsiq-newtheme.siq_lft {
+    right: 14px !important;
+    left: auto !important;
+  }
+}
+@media (min-width: 560px) and (max-width: 1023px) {
+  .zsiq-newtheme.siq_lft {
+    right: 8px !important;
+    left: auto !important;
+  }
+}
+@media (min-width: 1024px) {
+  .zsiq_theme1 .zsiq_flt_rel {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .zsiq_theme1.zsiq_floatmain {
+    width: 50px !important;
+    height: 50px !important;
+    z-index: 9 !important;
+    left: unset !important;
+    right: 24px !important;
+    bottom: 170px !important;
+  }
+  .zsiq_theme1 .siqicon:before {
+    line-height: 50px !important;
+    font-size: 20px !important;
+  }
+}
+
+/* cookie 弹窗 */
+.shopify-pc__banner__dialog {
+  @apply !bg-neutral-50 !px-4 !py-6 lg:!px-10 lg:!py-6;
+}
+
+.shopify-pc__prefs__overlay {
+  @apply !backdrop-blur-sm;
+}
+
+.shopify-pc__banner__dialog p,
+.shopify-pc__prefs__intro-main p,
+.shopify-pc__prefs__option p {
+  @apply !text-xs !text-neutral-600 lg:!text-sm;
+}
+
+.shopify-pc__banner__body {
+  @apply !mb-4 lg:!mb-0;
+}
+
+.shopify-pc__banner__body-title {
+  @apply !mb-1 !text-base !font-bold lg:!mb-2 lg:!text-lg;
+}
+
+.shopify-pc__banner__btns {
+  @apply !flex-row !flex-wrap !justify-start lg:!justify-end;
+}
+
+.shopify-pc__banner__dialog button {
+  @apply !m-0 !flex !h-9 !items-center !justify-center !text-sm lg:!h-11 lg:!text-base;
+}
+
+.shopify-pc__banner__dialog button.shopify-pc__banner__btn-manage-prefs {
+  @apply !w-full !text-sm !text-neutral-900 max-sm:!flex-auto sm:!w-auto sm:!basis-auto lg:!text-base;
+}
+
+.shopify-pc__banner__dialog button.shopify-pc__banner__btn-accept {
+  @apply !rounded-full !border-blue-600 !bg-blue-600 !text-white !transition-colors hover:!border-blue-700 hover:!bg-blue-700 sm:!basis-auto !flex-1 xl:!flex-none xl:!w-[180px];
+}
+
+.shopify-pc__banner__dialog button.shopify-pc__banner__btn-decline {
+  @apply !rounded-full !border-neutral-200 !bg-neutral-200 !text-neutral-900 !transition-colors hover:!border-neutral-300 hover:!bg-neutral-300 sm:!basis-auto !flex-1 xl:!flex-none xl:!w-[180px];
+}
+
+/* 弹出cookie 管理样式 */
+.shopify-pc__prefs__dialog {
+  @apply !bg-neutral-50;
+}
+
+.shopify-pc__prefs__header-actions button {
+  @apply !rounded-full !transition-colors hover:!border-neutral-300 hover:!bg-neutral-300;
+}
+
+.shopify-pc__prefs__option label {
+  @apply !text-lg;
+}
