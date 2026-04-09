@@ -15,3 +15,5 @@ coverage/
 !.changeset/config.json
 .screenshots/
 .vercel
+build/
+.source/
