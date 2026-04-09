@@ -88,17 +88,17 @@ importers:
   apps/playground:
     dependencies:
       '@mg/tailwind-config':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.0
+        version: 0.2.0
       '@mg/ui':
-        specifier: ^0.1.2
-        version: 0.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.1.3
+        version: 0.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mg/ui-commerce':
-        specifier: ^0.1.2
-        version: 0.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.1.3
+        version: 0.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mg/utils':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.0
+        version: 0.2.0
       '@react-router/node':
         specifier: ^7.0.0
         version: 7.14.0(react-router@7.14.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.9.3)
@@ -1044,23 +1044,23 @@ packages:
   '@mdx-js/mdx@3.1.1':
     resolution: {integrity: sha512-f6ZO2ifpwAQIpzGWaBQT2TXxPv6z3RBzQKpVftEWN78Vl/YweF1uwussDx8ECAXVtr3Rs89fKyG9YlzUs9DyGQ==}
 
-  '@mg/tailwind-config@0.1.0':
-    resolution: {integrity: sha512-9QSkEKo3aHQYi1BZ8Cqxy9dIxuol3aCQCJvIiDf9RoxD3HZYAEW3AqYOG4Ovy/4Ix6P1v3aJLsyfaizSm6mvIw==}
+  '@mg/tailwind-config@0.2.0':
+    resolution: {integrity: sha512-R8CorZaqfIjWFgzeE1kkNs5B8Bkq/p/Fj2OOzqisSUvc7yGxCDk57rBPe/XDI+ctGwS1w+kVKMoe93knM+8Tsg==}
 
-  '@mg/ui-commerce@0.1.2':
-    resolution: {integrity: sha512-nqFOAFOPHCLZCuVdleXyWLNts+uf+t390HtvraJTfr/Zr1tlpN+kyMIzltXLqNZVo6oq+qVBWj8FWLWOh6nZEw==}
+  '@mg/ui-commerce@0.1.3':
+    resolution: {integrity: sha512-X91wvnXGFnEJkZW8/MnmAqbgs+PQJRnjWlf6kCZn7JYNk/WlfLct0bIvoiHmghQspMErJzjDmM6C4a2Cg1Zmcw==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
 
-  '@mg/ui@0.1.2':
-    resolution: {integrity: sha512-gqU3NSVcKCVyfmbMD4Q5hhhsjXI5IvzymkrGhsplGkXJ4RXud8uOHL+pj/n0XL+r4z0a0cneP0Vs/nsuFZuJZg==}
+  '@mg/ui@0.1.3':
+    resolution: {integrity: sha512-lPih02dcYQrDNRoyCIfbBU6tEh6TawcMniEA2H0Ivyb8Li6bEdh0/KsXgRCNFqn87GCoNQRS/Xvfgz0e3iECLQ==}
     peerDependencies:
       react: ^18.0.0
       react-dom: ^18.0.0
 
-  '@mg/utils@0.1.0':
-    resolution: {integrity: sha512-gisjS/xGdVEAcYeDWq48IFmaPnm6b/fsK7g9h5WcanI3R49KfWqgPrIXaeRXqC83WYLqkehDCeo4kTHb6zQo4w==}
+  '@mg/utils@0.2.0':
+    resolution: {integrity: sha512-FjVI+96PDauQ+7bDDDkb+XT3/V2Nx6VDU8Y6ZOmVv+8v9DpfsWCt6B9aEKT2oaV1I63MNopqvfUs2kP3kB1nIA==}
 
   '@mjackson/node-fetch-server@0.2.0':
     resolution: {integrity: sha512-EMlH1e30yzmTpGLQjlFmaDAjyOeZhng1/XCd7DExR8PNAnG/G1tyruZxEoUe11ClnwGhGrtsdnyyUx1frSzjng==}
@@ -5076,22 +5076,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mg/tailwind-config@0.1.0': {}
+  '@mg/tailwind-config@0.2.0': {}
 
-  '@mg/ui-commerce@0.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@mg/ui-commerce@0.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@mg/ui': 0.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@mg/utils': 0.1.0
+      '@mg/ui': 0.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@mg/utils': 0.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@mg/ui@0.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@mg/ui@0.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@mg/utils': 0.1.0
+      '@mg/utils': 0.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@mg/utils@0.1.0':
+  '@mg/utils@0.2.0':
     dependencies:
       clsx: 2.1.1
       tailwind-merge: 3.5.0
