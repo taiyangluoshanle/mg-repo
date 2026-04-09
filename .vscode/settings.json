@@ -1,0 +1,10 @@
+{
+  "tailwindCSS.experimental.configFile": {
+    "apps/docs/src/app/globals.css": [
+      "apps/docs/src/**",
+      "packages/ui/src/**",
+      "packages/ui-commerce/src/**",
+      "packages/utils/src/**"
+    ]
+  }
+}

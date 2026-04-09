@@ -3,6 +3,12 @@ import { createMDX } from "fumadocs-mdx/next";
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  transpilePackages: [
+    "@mg/ui",
+    "@mg/ui-commerce",
+    "@mg/utils",
+    "@mg/tailwind-config",
+  ],
   typescript: {
     ignoreBuildErrors: true,
   },

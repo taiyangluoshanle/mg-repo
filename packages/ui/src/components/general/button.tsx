@@ -28,7 +28,7 @@ function mergeRefs<T>(...refs: Array<Ref<T> | undefined>): RefCallback<T> {
 }
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center cursor-pointer justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -43,9 +43,9 @@ const buttonVariants = cva(
           "border border-border bg-transparent text-foreground hover:bg-background-secondary",
       },
       size: {
-        sm: "h-8 px-3 text-xs",
-        md: "h-10 px-4 py-2",
-        lg: "h-11 px-8 text-base",
+        sm: "px-3 text-xs",
+        md: "px-4 py-2",
+        lg: "px-8 text-base",
       },
     },
     defaultVariants: {

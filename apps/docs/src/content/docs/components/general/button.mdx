@@ -25,58 +25,46 @@ export default function Demo() {
 
 ## 变体
 
-所有变体：`primary`、`secondary`、`outline`、`ghost`、`destructive`。
-
-<ComponentPreview>
+<ComponentShowcase>
   <ButtonVariantsDemo />
-</ComponentPreview>
+</ComponentShowcase>
 
 ```tsx
 import { Button } from '@mg/ui';
 
-export default function Demo() {
-  return (
-    <div className="flex flex-wrap items-center gap-3">
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="destructive">Destructive</Button>
-    </div>
-  );
-}
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Destructive</Button>
 ```
 
 ## 尺寸
 
-三种尺寸：`sm`、`md`（默认）、`lg`。
-
-<ComponentPreview>
+<ComponentShowcase>
   <ButtonSizesDemo />
-</ComponentPreview>
+</ComponentShowcase>
 
 ```tsx
 import { Button } from '@mg/ui';
 
-export default function Demo() {
-  return (
-    <div className="flex items-center gap-3">
-      <Button size="sm">Small</Button>
-      <Button size="md">Medium</Button>
-      <Button size="lg">Large</Button>
-    </div>
-  );
-}
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
 ```
 
 ## 禁用状态
 
-<ComponentPreview>
+<ComponentShowcase>
   <ButtonDisabledDemo />
-</ComponentPreview>
+</ComponentShowcase>
 
 ```tsx
+import { Button } from '@mg/ui';
+
 <Button disabled>Disabled</Button>
+<Button variant="secondary" disabled>Disabled</Button>
+<Button variant="outline" disabled>Disabled</Button>
 ```
 
 ## API
