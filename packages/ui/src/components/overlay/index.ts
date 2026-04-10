@@ -1,12 +1,4 @@
-export {
-  Dialog,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-  type DialogProps,
-} from "./dialog";
+export { Dialog, type DialogProps, type DialogSize } from "./dialog";
 export {
   Drawer,
   DrawerRoot,

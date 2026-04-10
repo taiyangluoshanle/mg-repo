@@ -1,0 +1,21 @@
+---
+title: CommerceAccordion
+description: 电商手风琴组件，常用于 FAQ、产品说明等场景。
+---
+
+## 基本用法
+
+<ComponentBlock cli="@mg/ui-commerce" code={`import { CommerceAccordion } from "@mg/ui-commerce";\n\n<CommerceAccordion\n  defaultValue="faq-1"\n  items={[\n    { value: "faq-1", title: "发货时间是多久？", content: <p>3-5 个工作日内发货</p> },\n    { value: "faq-2", title: "支持退换货吗？", content: <p>30 天无理由退换</p> },\n  ]}\n/>`}>
+  <CommerceAccordionDemo />
+</ComponentBlock>
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| items | `AccordionDataItem[]` | - | 数据列表 `{ value, title, content }` |
+| defaultValue | `string` | - | 默认展开项 |
+| triggerClassName | `string` | - | 触发器类名 |
+| itemClassName | `string` | - | 每项容器类名 |
+| contentClassName | `string` | - | 内容区类名 |
+| iconNode | `ReactNode` | 默认箭头 | 自定义展开图标 |

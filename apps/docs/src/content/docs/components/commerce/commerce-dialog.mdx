@@ -1,0 +1,23 @@
+---
+title: CommerceDialog
+description: 电商弹窗组件，移动端底部弹出、桌面端居中显示。
+---
+
+## 基本用法
+
+<ComponentBlock cli="@mg/ui-commerce" code={`import { CommerceDialog } from "@mg/ui-commerce";\n\nconst [open, setOpen] = useState(false);\n\n<button onClick={() => setOpen(true)}>打开</button>\n<CommerceDialog open={open} onClose={() => setOpen(false)} title="产品详情">\n  <div className="p-4">弹窗内容</div>\n</CommerceDialog>`}>
+  <CommerceDialogDemo />
+</ComponentBlock>
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| open | `boolean` | - | 是否打开 |
+| onClose | `(open: boolean) => void` | - | 关闭回调 |
+| title | `ReactNode` | - | 标题 |
+| zIndex | `number` | `50` | 层级 |
+| showClose | `boolean` | `true` | 显示关闭按钮 |
+| closeIcon | `ReactNode` | - | 自定义关闭图标 |
+| overlayClassName | `string` | - | 遮罩层类名 |
+| contentClassName | `string` | - | 内容区类名 |

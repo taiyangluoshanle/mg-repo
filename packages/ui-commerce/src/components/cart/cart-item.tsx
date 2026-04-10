@@ -42,9 +42,8 @@ export const CartItem = forwardRef<HTMLDivElement, CartItemProps>(
               {title}
             </Text>
             <Button
-              type="button"
-              variant="ghost"
-              size="sm"
+              variant="text"
+              size="small"
               className="h-8 shrink-0 text-destructive hover:text-destructive"
               onClick={onRemove}
             >

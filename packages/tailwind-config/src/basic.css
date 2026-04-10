@@ -1,12 +1,9 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
-@plugin "flowbite/plugin";
 
 @source "../**/*.{js,ts,jsx,tsx}";
 @source '../../../../packages/components/src/**/*.{js,ts,jsx,tsx}';
-@source "../../../../node_modules/flowbite/dist/flowbite.js";
-@source "../../../../node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}";
 @source "../../../../node_modules/react-tailwindcss-datepicker/dist/index.esm.js";
 @source "../../../../node_modules/@bluetti/**/*.{js,jsx,tsx}";
 

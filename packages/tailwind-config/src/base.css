@@ -87,6 +87,44 @@
   font-display: swap;
 }
 
+@theme inline {
+  /* ── Brand ── */
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-subtle: var(--brand-subtle);
+
+  /* ── Background ── */
+  --color-background: var(--bg-primary);
+  --color-background-secondary: var(--bg-secondary);
+  --color-background-tertiary: var(--bg-tertiary);
+  --color-background-inverse: var(--bg-inverse);
+
+  /* ── Foreground ── */
+  --color-foreground: var(--fg-primary);
+  --color-foreground-secondary: var(--fg-secondary);
+  --color-foreground-muted: var(--fg-muted);
+  --color-foreground-inverse: var(--fg-inverse);
+
+  /* ── Semantic ── */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+
+  /* ── Surface & Border ── */
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  /* ── Typography ── */
+  --font-sans: "Bluetti", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Bluetti", Palatino, ui-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-display: "Sora", "Noto Sans SC", sans-serif;
+}
+
 @layer base {
   :root {
     /* ── Brand / Blue ── */

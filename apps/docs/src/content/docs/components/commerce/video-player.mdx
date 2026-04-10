@@ -1,0 +1,22 @@
+---
+title: VideoPlayer
+description: 视频播放器组件，支持自动播放、可见性暂停和播放控制。
+---
+
+## 基本用法
+
+<ComponentBlock cli="@mg/ui-commerce" code={`import { VideoPlayer } from "@mg/ui-commerce";\n\n<VideoPlayer\n  source="https://example.com/video.webm"\n  showControls\n  className="aspect-video"\n/>`}>
+  <VideoPlayerDemo />
+</ComponentBlock>
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| source | `string` | - | 视频 URL |
+| showControls | `boolean` | `false` | 显示播放/暂停按钮 |
+| pauseWhenHidden | `boolean` | `true` | 不可见时自动暂停 |
+| wrapperClassName | `string` | - | 外层容器类名 |
+| autoPlay | `boolean` | `true` | 自动播放 |
+| loop | `boolean` | `true` | 循环播放 |
+| muted | `boolean` | `true` | 静音 |

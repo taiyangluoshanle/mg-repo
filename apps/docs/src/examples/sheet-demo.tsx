@@ -7,7 +7,7 @@ export const SheetBasicDemo = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button size="sm" onClick={() => setOpen(true)}>
+      <Button size="small" onClick={() => setOpen(true)}>
         打开底部面板
       </Button>
       <Sheet open={open} onOpenChange={setOpen}>

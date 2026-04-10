@@ -27,9 +27,8 @@ export const SkuSelector = forwardRef<HTMLDivElement, SkuSelectorProps>(
                 return (
                   <Button
                     key={v}
-                    type="button"
-                    size="sm"
-                    variant={active ? "primary" : "outline"}
+                    size="small"
+                    variant={active ? "primary" : "default"}
                     onClick={() => onValueChange({ ...value, [group.name]: v })}
                   >
                     {v}

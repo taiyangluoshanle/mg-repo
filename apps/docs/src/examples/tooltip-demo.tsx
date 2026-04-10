@@ -6,7 +6,7 @@ export const TooltipBasicDemo = () => {
   return (
     <Tooltip>
       <TooltipTrigger className="inline-flex">
-        <Button size="sm" variant="outline">
+        <Button size="small" variant="default">
           悬停查看
         </Button>
       </TooltipTrigger>

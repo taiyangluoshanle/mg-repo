@@ -3,41 +3,12 @@
 @import "fumadocs-ui/css/preset.css";
 @import "@mg/tailwind-config/base.css";
 
+@source "../../node_modules/@mg/components/dist";
 @source "../../node_modules/@mg/ui/dist";
 @source "../../node_modules/@mg/ui-commerce/dist";
 
 @theme inline {
-  /* ── Brand ── */
-  --color-brand: var(--brand);
-  --color-brand-hover: var(--brand-hover);
-  --color-brand-active: var(--brand-active);
-  --color-brand-subtle: var(--brand-subtle);
-
-  /* ── Background ── */
-  --color-background: var(--bg-primary);
-  --color-background-secondary: var(--bg-secondary);
-  --color-background-tertiary: var(--bg-tertiary);
-  --color-background-inverse: var(--bg-inverse);
-
-  /* ── Foreground ── */
-  --color-foreground: var(--fg-primary);
-  --color-foreground-secondary: var(--fg-secondary);
-  --color-foreground-muted: var(--fg-muted);
-  --color-foreground-inverse: var(--fg-inverse);
-
-  /* ── Semantic ── */
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-error: var(--error);
-  --color-info: var(--info);
-
-  /* ── Surface & Border ── */
-  --color-surface: var(--surface);
-  --color-surface-hover: var(--surface-hover);
-  --color-border: var(--border);
-  --color-border-strong: var(--border-strong);
-
-  /* ── Raw Blue Palette ── */
+  /* docs 站额外需要的 token（base.css 已内置语义色映射） */
   --color-blue-50: #e8f0fe;
   --color-blue-100: #e1effe;
   --color-blue-200: #c3ddfd;
@@ -49,7 +20,6 @@
   --color-blue-800: #1959b3;
   --color-blue-900: #233876;
 
-  /* ── Raw Neutral Palette ── */
   --color-neutral-50: #fafafc;
   --color-neutral-100: #f5f5f7;
   --color-neutral-200: #e9e9ed;
@@ -62,7 +32,6 @@
   --color-neutral-900: #1d1d1f;
   --color-neutral-950: #161617;
 
-  /* ── Typography ── */
   --font-display: "Sora", "Noto Sans SC", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }

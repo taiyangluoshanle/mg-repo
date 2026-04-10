@@ -7,7 +7,7 @@ export const DrawerBasicDemo = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button size="sm" onClick={() => setOpen(true)}>
+      <Button size="small" onClick={() => setOpen(true)}>
         打开抽屉
       </Button>
       <Drawer open={open} onOpenChange={setOpen} side="right">

@@ -1,0 +1,17 @@
+---
+title: ClientOnly
+description: SSR 客户端渲染包装组件，仅在客户端环境下渲染子元素。
+---
+
+## 基本用法
+
+<ComponentBlock cli="@mg/ui-commerce" code={`import { ClientOnly } from "@mg/ui-commerce";\n\n<ClientOnly fallback={<span>加载中...</span>}>\n  <span>当前时间：{new Date().toLocaleTimeString()}</span>\n</ClientOnly>`}>
+  <ClientOnlyDemo />
+</ComponentBlock>
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| children | `ReactNode` | - | 仅客户端渲染的内容 |
+| fallback | `ReactNode` | `null` | 服务端渲染时的占位内容 |

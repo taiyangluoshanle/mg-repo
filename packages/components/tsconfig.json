@@ -1,0 +1,11 @@
+{
+  "extends": "@mg/tsconfig/react-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "tsup.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}

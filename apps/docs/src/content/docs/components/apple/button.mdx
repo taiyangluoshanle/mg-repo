@@ -1,0 +1,75 @@
+---
+title: 按钮 (Button)
+description: Apple 设计风格的按钮组件，支持 Primary、Dark、Pill、Filter、Media 五种变体。
+---
+
+## 基础用法
+
+<ComponentBlock
+  cli="@mg/components"
+  code={`import { Button } from "@mg/components";
+
+export function Demo() {
+  return <Button>开始使用</Button>;
+}`}
+>
+  <AppleButtonBasicDemo />
+</ComponentBlock>
+
+## 变体 (Variants)
+
+Apple 风格按钮支持五种变体，覆盖不同业务场景。
+
+<ComponentBlock
+  cli="@mg/components"
+  code={`import { Button } from "@mg/components";
+
+export function Demo() {
+  return (
+    <div className="flex flex-wrap gap-4">
+      <Button variant="primary">Primary</Button>
+      <Button variant="dark">Dark CTA</Button>
+      <Button variant="pill" size="pill">Pill Link</Button>
+      <Button variant="filter" size="filter">Filter</Button>
+      <Button variant="media" size="media">
+        <PlayIcon />
+      </Button>
+    </div>
+  );
+}`}
+>
+  <AppleButtonVariantsDemo />
+</ComponentBlock>
+
+## 尺寸 (Sizes)
+
+支持 `default`、`pill`、`filter` 和 `media` 四种尺寸。
+
+<ComponentBlock
+  cli="@mg/components"
+  code={`import { Button } from "@mg/components";
+
+export function Demo() {
+  return (
+    <div className="flex items-center gap-4 flex-wrap">
+      <Button size="default">Default</Button>
+      <Button variant="pill" size="pill">Pill Size</Button>
+      <Button variant="filter" size="filter">Filter Size</Button>
+      <Button variant="media" size="media">
+        <PauseIcon />
+      </Button>
+    </div>
+  );
+}`}
+>
+  <AppleButtonSizesDemo />
+</ComponentBlock>
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `variant` | `"primary" \| "dark" \| "pill" \| "filter" \| "media"` | `"primary"` | 按钮变体 |
+| `size` | `"default" \| "pill" \| "filter" \| "media"` | `"default"` | 按钮尺寸 |
+| `asChild` | `boolean` | `false` | 将样式代理到子元素 |
+| `disabled` | `boolean` | `false` | 禁用状态 |

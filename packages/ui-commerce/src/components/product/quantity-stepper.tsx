@@ -27,9 +27,8 @@ export const QuantityStepper = forwardRef<HTMLDivElement, QuantityStepperProps>(
     return (
       <div ref={ref} className={cn("inline-flex items-center gap-1", className)} {...props}>
         <Button
-          type="button"
-          variant="outline"
-          size="sm"
+          variant="default"
+          size="small"
           className="h-9 w-9 shrink-0 px-0"
           aria-label="减少数量"
           disabled={value <= min}
@@ -53,9 +52,8 @@ export const QuantityStepper = forwardRef<HTMLDivElement, QuantityStepperProps>(
           }}
         />
         <Button
-          type="button"
-          variant="outline"
-          size="sm"
+          variant="default"
+          size="small"
           className="h-9 w-9 shrink-0 px-0"
           aria-label="增加数量"
           disabled={value >= max}

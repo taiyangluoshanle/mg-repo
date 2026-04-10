@@ -1,0 +1,21 @@
+---
+title: SimpleCarousel
+description: 简单轮播图组件，支持箭头导航、圆点指示器和计数器。
+---
+
+## 基本用法
+
+<ComponentBlock cli="@mg/ui-commerce" code={`import { SimpleCarousel } from "@mg/ui-commerce";\n\n<SimpleCarousel\n  showCounter\n  slides={[\n    "https://placehold.co/400x400?text=1",\n    "https://placehold.co/400x400?text=2",\n    "https://placehold.co/400x400?text=3",\n  ]}\n/>`}>
+  <SimpleCarouselDemo />
+</ComponentBlock>
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| slides | `string[]` | - | 图片 URL 数组 |
+| showArrows | `boolean` | `true` | 显示箭头 |
+| showDots | `boolean` | `true` | 显示圆点指示器 |
+| showCounter | `boolean` | `false` | 显示计数器 |
+| counterPosition | `"left" \| "right"` | `"right"` | 计数器位置 |
+| aspectRatio | `string` | `"1/1"` | 图片宽高比 |

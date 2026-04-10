@@ -1,0 +1,22 @@
+---
+title: HighlightText
+description: 文本高亮组件，支持字符串、数组、正则三种匹配模式。
+---
+
+## 基本用法
+
+<ComponentBlock cli="@mg/ui-commerce" code={`import { HighlightText } from "@mg/ui-commerce";\n\n<HighlightText\n  text="在 BLUETTI 官网搜索 EP2000 电源产品"\n  highlight="EP2000"\n  highlightClassName="font-bold text-blue-600"\n/>`}>
+  <HighlightTextDemo />
+</ComponentBlock>
+
+## API
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| text | `string` | - | 完整文本 |
+| highlight | `string \| string[] \| RegExp \| null` | `null` | 要高亮的模式 |
+| highlightColor | `string` | - | 高亮颜色（优先于 class） |
+| highlightClassName | `string` | - | 高亮样式类名 |
+| caseSensitive | `boolean` | `false` | 是否区分大小写 |
+| tag | `keyof JSX.IntrinsicElements` | `"span"` | 外层标签 |
+| onHighlightClick | `(value: string, index: number) => void` | - | 高亮项点击回调 |

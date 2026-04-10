@@ -7,7 +7,7 @@ export const AlertDialogBasicDemo = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button size="sm" onClick={() => setOpen(true)}>
+      <Button size="small" onClick={() => setOpen(true)}>
         打开确认弹窗
       </Button>
       <AlertDialog

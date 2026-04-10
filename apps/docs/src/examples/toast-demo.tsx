@@ -6,7 +6,7 @@ const ToastTrigger = () => {
   const { toast } = useToast();
   return (
     <Button
-      size="sm"
+      size="small"
       variant="primary"
       onClick={() =>
         toast({

@@ -4,6 +4,7 @@ import { createMDX } from "fumadocs-mdx/next";
 const config = {
   reactStrictMode: true,
   transpilePackages: [
+    "@mg/components",
     "@mg/ui",
     "@mg/ui-commerce",
     "@mg/utils",

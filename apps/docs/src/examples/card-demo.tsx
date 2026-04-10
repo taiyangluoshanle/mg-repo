@@ -13,10 +13,10 @@ export const CardBasicDemo = () => {
         <p className="text-sm">卡片内容区域，可以放置任意内容。</p>
       </CardContent>
       <CardFooter className="justify-end gap-2">
-        <Button variant="outline" size="sm">
+        <Button variant="default" size="small">
           取消
         </Button>
-        <Button size="sm">确认</Button>
+        <Button size="small">确认</Button>
       </CardFooter>
     </Card>
   );
